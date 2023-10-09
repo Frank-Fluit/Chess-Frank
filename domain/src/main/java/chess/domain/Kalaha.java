@@ -1,4 +1,4 @@
-package mancala.domain;
+package chess.domain;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package mancala.domain;
+package chess.domain;
 
 public class PlayableBowl extends Bowl {
 
