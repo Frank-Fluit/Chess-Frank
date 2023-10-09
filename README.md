@@ -1,5 +1,48 @@
 # Schaak Frank
 
+Doelstelling van project in MoSCoW format:
+
+Musts:
+Implement moving Pawn
+Implement horse
+show board
+Save winner to database
+Implement moving King
+Implement checkmate
+
+Shoulds: 
+Implement  moving Queen
+Implement moving Bishop
+Implement moving Rook
+UI where you can grab and move a piece
+Implement promoting a piece
+high test coverage
+
+
+Coulds:
+Implement stalemate
+Implement castling
+Implement en passent
+
+Woulds:
+Be able to play against AI
+play games to other people online
+
+
+
+Details van Software Stack:
+Domain is implemented in Java
+
+
+
+Persoonlijk Leerdoel (proces):
+Duidelijke planning bijhouden en flexibel hierin zijn
+
+Technisch Leerdoel (tools, frameworks, etc.):
+Oefenen opzetten complex domein
+
+
+
 
 
 ## Getting started
