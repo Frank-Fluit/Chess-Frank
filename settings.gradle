@@ -1,0 +1,2 @@
+rootProject.name = 'Schaak Frank'
+include('api', 'domain')
