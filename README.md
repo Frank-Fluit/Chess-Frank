@@ -23,6 +23,7 @@ Coulds:
 Implement stalemate
 Implement castling
 Implement en passent
+UI that shows game status during game
 
 Woulds:
 Be able to play against AI
