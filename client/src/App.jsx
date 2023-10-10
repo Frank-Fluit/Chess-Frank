@@ -4,7 +4,32 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [greeting, setGreeting] = useState('');
+
+  const fetchGreeting = () => {
+
+    fetch('/api/hello')
+
+      .then((response) => {
+
+        if (!response.ok) {
+
+          throw new Error('Network response was not ok');
+        }
+
+
+
+        return response.text();
+      })
+      .then((data) => {
+        setGreeting(data);
+        console.log(data)
+      })
+      .catch((error) => {
+        console.error('Fetch error:', error);
+      });
+  };
 
   return (
     <>
@@ -18,12 +43,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <button onClick={fetchGreeting}>Fetch Greeting</button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
+        {greeting && <p>Greeting from the server: {greeting}</p>}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
