@@ -9,7 +9,7 @@ function App() {
 
   const fetchGreeting = () => {
 
-    fetch('/api/hello/')
+    fetch('/api/hello')
 
       .then((response) => {
 
@@ -17,7 +17,7 @@ function App() {
 
           throw new Error('Network response was not ok');
         }
-        console.log(response);
+
 
 
         return response.text();
