@@ -9,7 +9,7 @@ function App() {
 
   const fetchGreeting = () => {
 
-    fetch('/api/hello')
+    fetch('/api/startgame')
 
       .then((response) => {
 
@@ -33,27 +33,24 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+
+      <h1><b>ChessGame Individual Project Sogyo Frank Fluit</b></h1>
       <div className="card">
-        <button onClick={fetchGreeting}>Fetch Greeting</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        {greeting && <p>Greeting from the server: {greeting}</p>}
+        <button onClick={fetchGreeting}>Click <b>here</b> to start game</button>
+
+        {greeting && <p>GET request result: {greeting}</p>}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <div className="card">
+        <button onClick={fetchGreeting}>Click <b>here</b> to do a move </button>
+        <br />
+        [input move to be implemented]
+
+      </div>
+
     </>
   )
 }
 
 export default App
+

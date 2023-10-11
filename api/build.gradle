@@ -16,9 +16,16 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+	mainClassName = 'nl.sogyo.ChessApplication'
+}
+
 dependencies {
-	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(path: ':domain')
+	implementation project(path: ':domain')
+	implementation project(path: ':domain')
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
