@@ -1,5 +1,9 @@
 # Schaak Frank
 
+
+[![pipeline status](https://git.sogyo.nl/ffluit/schaak-frank/badges/main/pipeline.svg)](https://git.sogyo.nl/ffluit/schaak-frank/-/commits/main)
+[![coverage report](https://git.sogyo.nl/ffluit/schaak-frank/badges/main/coverage.svg)](https://git.sogyo.nl/ffluit/schaak-frank/-/commits/main)
+
 Doelstelling van project in MoSCoW format:
 
 Musts:
