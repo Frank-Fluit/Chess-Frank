@@ -1,24 +1,17 @@
 image: gradle:7.2
 variables:
-    BUILD_NUMBER: $CI_PIPELINE_IID
-    BRANCH_NAME: $CI_COMMIT_REF_NAME
-    COMMIT_HASH: $CI_COMMIT_SHA
+
 stages:
   - build
   - run-tests
   - process-coverage
-  - process-coverage-api
+
 
 build:
   stage: build
   script:
     - ./gradlew build
-    - ./gradlew createArtifact
-  artifacts:
-    name: "${BRANCH_NAME}-${BUILD_NUMBER}-${COMMIT_HASH}"
-    paths:
-    - ./*/build/libs/*.jar
-    - ./client/**/*
+
 
 
 run-tests:
