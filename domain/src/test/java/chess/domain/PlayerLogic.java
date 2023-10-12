@@ -33,8 +33,8 @@ public class PlayerLogic {
     @Test
     public void checkIfTurnSwitchesAfterMove() {
         Board chessBoard = new Board();
-        Square square= chessBoard.squares[1][1];
-        Piece pawnPlayer1 = square.getPiece();
+        //Square square= chessBoard.getSquares()[1][1];
+        //Piece pawnPlayer1 = square.getPiece();
         //Player pawnPlayer1.getOwner(); // to be implemented
 
 
