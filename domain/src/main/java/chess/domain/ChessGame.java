@@ -11,6 +11,13 @@ public class ChessGame implements Playable{
     public PieceEnum getPieceForSquare(int rank, int file) {
         return PieceEnum.Pawn;
     }
+
+
+    //could be removed
+    @Override
+    public Square[][] getboardState() {
+        return new Square[0][];
+    }
 }
 
 
