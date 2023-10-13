@@ -9,14 +9,38 @@ public class ChessGame implements Playable{
     }
     @Override
     public PieceEnum getPieceForSquare(int rank, int file) {
-        return PieceEnum.Pawn;
-    }
+        Square square = chessBoard.getSquares(rank, file);
 
+        if(square.getPiece() == null){
+            return PieceEnum.Empty;
+        }
 
-    //could be removed
-    @Override
-    public Square[][] getboardState() {
-        return new Square[0][];
+        if(square.getPiece().getClass().equals(Pawn.class)){
+            return PieceEnum.Pawn;
+        }
+
+        if(square.getPiece().getClass().equals(Bisshop.class)){
+            return PieceEnum.Bisshop;
+        }
+
+        if(square.getPiece().getClass().equals(King.class)){
+            return PieceEnum.King;
+        }
+
+        if(square.getPiece().getClass().equals(Queen.class)){
+            return PieceEnum.Queen;
+        }
+
+        if(square.getPiece().getClass().equals(Rook.class)){
+            return PieceEnum.Rook;
+        }
+
+        if(square.getPiece().getClass().equals(Knight.class)){
+            return PieceEnum.Knight;
+        }
+        else{
+            return PieceEnum.Empty;
+        }
     }
 }
 

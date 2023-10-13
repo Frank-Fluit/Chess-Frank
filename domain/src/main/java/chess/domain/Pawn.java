@@ -6,12 +6,12 @@ public class Pawn extends Piece{
 
     }
 
-
-    public Pawn(int row, int col,Board board) {
-        this.row = row;
-        this.col = col;
+    public Pawn(Square square,Board board, Player owner) {
+        this.square = square;
         this.board = board;
+        this.owner = owner;
     }
+
 
 
 }
