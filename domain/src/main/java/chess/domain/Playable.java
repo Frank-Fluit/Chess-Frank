@@ -9,6 +9,8 @@ public interface Playable {
     }
 
     PieceEnum getPieceForSquare(int rank, int file);
+
+    Square[][] getboardState();
 }
 
 

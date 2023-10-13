@@ -14,4 +14,14 @@ public class Square {
     protected Piece getPiece() {
         return this.piece;
     }
+
+    public void empty(){
+        this.piece = null;
+    }
+
+    public void update(Piece piece){
+        this.piece = piece;
+    }
+
+
 }
