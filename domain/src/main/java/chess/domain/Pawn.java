@@ -42,6 +42,12 @@ public class Pawn extends Piece{
         if(colDifference != 0 && targetSquare.getPiece() == null){
             return false;
         }
+        if(Math.abs(rowDifference) ==2 && this.getOwner().getColour().equals("white") && board.getSquares(originRow+1,originCol).getPiece() != null ) {
+            return false;
+        }
+        if(Math.abs(rowDifference) ==2 && this.getOwner().getColour().equals("black") && board.getSquares(originRow-1,originCol).getPiece() != null ) {
+            return false;
+        }
         if(Math.abs(rowDifference) >1 && this.previousLocation != null){
             return false;
         }
@@ -55,7 +61,9 @@ public class Pawn extends Piece{
     }
 
     public void updateSquares(Square originSquare, Square targetSquare){
-        targetSquare.update(this);
+        int[] newLocation = targetSquare.getLocation();
+        this.square = targetSquare;
+        targetSquare.update(this, newLocation);
         originSquare.empty();
     }
 
