@@ -36,7 +36,13 @@ public class Board {
 
 
     public Square getSquares(int row, int col) {
+
         int index = row*8 + col;
-        return squares[index];
+
+        if(index >= 0 && index < 64){
+        return squares[index];}
+        else{
+            throw new IllegalArgumentException("Wrong input");
+        }
     }
 }
