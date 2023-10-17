@@ -16,15 +16,13 @@ public abstract class Piece {
         this.board = board;
     }
 
-//    void doMove(int targetRow, int targetCol){
-//        //TODO : legalmovecheck
-//        this.board.getSquares(this.row,this.col).empty();
-//        Square targetSquare = this.board.getSquares(targetRow,targetCol);
-//        targetSquare.update(this);
-//        this.row = targetRow;
-//        this.col =targetCol;
-//
-//    }
+    public Square getParentSquare(){
+        return this.square;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
 }
 
 

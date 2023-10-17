@@ -51,8 +51,16 @@ public class Square {
         return this.piece;
     }
 
+    protected int[] getLocation(){
+        return this.location;
+    }
+
     public void empty(){
         this.piece = null;
+    }
+
+    public Boolean checkIfContainsPiece() {
+        return this.getPiece() != null;
     }
 
     public void update(Piece piece){
@@ -60,4 +68,7 @@ public class Square {
     }
 
 
+    public void pieceGetsTaken() {
+        this.piece = null;
+    }
 }

@@ -23,7 +23,7 @@ public class Board {
 
     public Board() {
 
-        Player playerWhite = new Player();
+        Player playerWhite = new Player("white");
 
         squares = new Square[64];
         for (int count = 0; count < 64; count++) {

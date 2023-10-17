@@ -10,20 +10,20 @@ public class PlayerLogic {
 
     @Test
     public void testNewPlayerHasTurn() {
-        Player player = new Player();
+        Player player = new Player("white");
         assertTrue(player.getHasTurn());
     }
 
     @Test
     public void checkIfPlayerKnowsOtherPlayer() {
-        Player player1 = new Player();
+        Player player1 = new Player("white");
 
         assertNotNull(player1.getOpponent());
     }
 
     @Test
     public void checkIfOpponentOfOpponentIsOriginalPlayer(){
-        Player player1 = new Player();
+        Player player1 = new Player("white");
         Player player2 = player1.getOpponent();
 
         assertSame(player1, player2.getOpponent());
