@@ -13,7 +13,7 @@ public class Knight extends Piece {
             doMove(targetRow,targetCol);
         }
     }
-    
+
     //Stays the same as pawn
     private boolean targetSquareOnBoard(int targetRow, int targetCol) {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol <8);
