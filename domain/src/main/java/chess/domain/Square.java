@@ -63,8 +63,9 @@ public class Square {
         return this.getPiece() != null;
     }
 
-    public void update(Piece piece){
+    public void update(Piece piece, int[] location){
         this.piece = piece;
+        this.location = location;
     }
 
 
