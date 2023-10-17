@@ -1,27 +1,27 @@
 package chess.domain;
 
 public abstract class Piece {
-    int row;
-    int col;
+
     Board board;
+    Square square;
+
+    Player owner;
 
     public Piece() {
 
     }
 
-    public Piece(int row, int col){
-        this.row = row;
-        this.col = col;
+    public Piece(Square square, Board board){
+        this.square = square;
+        this.board = board;
     }
 
-    void doMove(int targetRow, int targetCol){
-        //TODO : legalmovecheck
-        this.board.getSquares(this.row,this.col).empty();
-        Square targetSquare = this.board.getSquares(targetRow,targetCol);
-        targetSquare.update(this);
-        this.row = targetRow;
-        this.col =targetCol;
+    public Square getParentSquare(){
+        return this.square;
+    }
 
+    public Player getOwner() {
+        return owner;
     }
 }
 

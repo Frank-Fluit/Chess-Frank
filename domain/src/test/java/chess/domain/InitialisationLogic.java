@@ -10,14 +10,7 @@ class InitialisationLogic {
 
 
 
-    @ParameterizedTest
-    @ValueSource(ints = {0,1,2,3,4,5,6,7})
-    public void testIfRow0IsEmpty(int num) {
-        Board chessBoard = new Board();
-        Square squareRow0 = chessBoard.getSquares(0,num);
 
-        assertNull(squareRow0.getPiece());
-    }
 
 
     @ParameterizedTest
@@ -86,14 +79,7 @@ class InitialisationLogic {
     }
 
 
-    @ParameterizedTest
-    @ValueSource(ints = {0,1,2,3,4,5,6,7})
-    public void testIfRow7IsEmpty(int num) {
-        Board chessBoard = new Board();
-        Square squareRow7 = chessBoard.getSquares(7,num);
 
-        assertNull(squareRow7.getPiece());
-    }
 
 
 

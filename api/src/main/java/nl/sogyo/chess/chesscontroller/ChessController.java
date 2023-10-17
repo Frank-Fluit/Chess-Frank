@@ -2,6 +2,7 @@ package nl.sogyo.chess.chesscontroller;
 
 import chess.domain.Playable;
 import chess.domain.ChessGame;
+import nl.sogyo.chess.chesscontroller.models.BoardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,17 @@ import java.util.List;
 public class ChessController {
 
 
-    @GetMapping
-    public String hello(){
+    @GetMapping(produces = "application/json")
+    public BoardDTO hello(){
+
 
         Playable chess = new ChessGame();
 
-        Playable.PieceEnum PieceOnSquare = chess.getPieceForSquare(1,1);
+        var output = new BoardDTO(chess);
 
-        return PieceOnSquare.toString();
+
+        return output;
+
     }
 
 

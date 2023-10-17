@@ -4,17 +4,22 @@ public class Player{
     private Boolean hasTurn;
     private Player opponent;
 
+    private String colour;
 
 
-    public Player() {
+
+    public Player(String colour) {
 
         this.hasTurn = true;
-        this.opponent = new Player(false, this);
+        this.opponent = new Player(false, this, "black");
+        this.colour = colour;
+
     }
 
-    public Player(Boolean hasTurn, Player opponent){
+    public Player(Boolean hasTurn, Player opponent, String colour){
         this.hasTurn = hasTurn;
         this.opponent = opponent;
+        this.colour = colour;
     }
 
 
@@ -27,6 +32,10 @@ public class Player{
     }
     public Boolean getHasTurn(){
         return hasTurn;
+    }
+
+    public String getColour(){
+        return this.colour;
     }
 
     public void switchTurn(){
