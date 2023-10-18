@@ -4,9 +4,15 @@ import chess.domain.Playable;
 
 public class SquareDTO {
     private Playable.PieceEnum PieceEnum;
+    private String colour;
 
-    public SquareDTO(Playable.PieceEnum PieceEnum) {
+    public SquareDTO(Playable.PieceEnum PieceEnum, String colour) {
         this.PieceEnum = PieceEnum;
+        this.colour = colour;
+    }
+
+    public String getColour() {
+        return colour;
     }
 
     public Playable.PieceEnum getPieceEnum() {

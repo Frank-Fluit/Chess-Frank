@@ -14,6 +14,9 @@ public interface Playable {
     }
 
     PieceEnum getPieceForSquare(int rank, int file);
+    String getColourPiece(int rank, int file);
+    String getNameOfPlayerOne();
+    String getNameOfPlayerTwo();
 
 
 }
