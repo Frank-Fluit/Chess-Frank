@@ -1,5 +1,7 @@
 package chess.domain;
 
+
+
 public class ChessGame implements Playable{
 
     private Board chessBoard;
@@ -21,6 +23,12 @@ public class ChessGame implements Playable{
     @Override
     public String getNameOfPlayerTwo() {
         return this.playerTwo;
+    }
+
+    @Override
+    public void playPiece(int[] originSquare, int[] targetSquare) {
+        chessBoard.getSquares(originSquare[0],originSquare[1]).getPiece().startAMove(targetSquare[0],targetSquare[1]);
+
     }
 
     @Override

@@ -7,4 +7,9 @@ public class Bisshop extends Piece {
         this.board = board;
         this.owner = owner;
     }
+
+    @Override
+    public void startAMove(int targetRow, int targetCol) {
+
+    }
 }

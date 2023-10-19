@@ -6,4 +6,9 @@ public class Rook extends Piece {
         this.board = board;
         this.owner = owner;
     }
+
+    @Override
+    public void startAMove(int targetRow, int targetCol) {
+
+    }
 }

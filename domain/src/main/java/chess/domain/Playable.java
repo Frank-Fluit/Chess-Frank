@@ -17,6 +17,7 @@ public interface Playable {
     String getColourPiece(int rank, int file);
     String getNameOfPlayerOne();
     String getNameOfPlayerTwo();
+    void playPiece(int[] originSquare, int[] targetSquare);
 
 
 }

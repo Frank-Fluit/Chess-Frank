@@ -23,6 +23,8 @@ public abstract class Piece {
     public Player getOwner() {
         return owner;
     }
+
+    public abstract void startAMove(int targetRow, int targetCol);
 }
 
 
