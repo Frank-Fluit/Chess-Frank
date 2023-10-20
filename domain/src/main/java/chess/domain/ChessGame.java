@@ -13,6 +13,7 @@ public class ChessGame implements Playable{
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         chessBoard = new Board();
+
     }
 
     @Override
@@ -29,6 +30,17 @@ public class ChessGame implements Playable{
     public void playPiece(int[] originSquare, int[] targetSquare) {
         chessBoard.getSquares(originSquare[0],originSquare[1]).getPiece().startAMove(targetSquare[0],targetSquare[1]);
 
+    }
+
+
+    @Override
+    public Boolean isPLayersTurn(String colour) {
+        if(colour == "white"){
+            return chessBoard.getPlayerWhite().getHasTurn();
+        }
+        else{
+            return chessBoard.getPlayerWhite().getOpponent().getHasTurn();
+        }
     }
 
     @Override

@@ -21,9 +21,14 @@ public class Board {
 //    }
 
 
+    public Player getPlayerWhite() {
+        return playerWhite;
+    }
+
     public Board() {
 
-        Player playerWhite = new Player("white");
+        this.playerWhite = new Player("white");
+
 
         squares = new Square[64];
         for (int count = 0; count < 64; count++) {

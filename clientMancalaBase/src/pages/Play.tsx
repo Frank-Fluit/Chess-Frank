@@ -128,6 +128,11 @@ export const Play = () => {
 
     <div className="text-center mt-40">
       <p className="text-xl font-bold">Player 1: {gameState?.players[0].name}</p>
+      <p className="text-xl font-bold">
+        <p className="text-xl font-bold">
+          Current Turn: {gameState?.players[0]?.hasTurn ? gameState.players[0].name + " (white)" : gameState.players[1].name + " (black)"}
+        </p>
+      </p>
     </div>
 
 

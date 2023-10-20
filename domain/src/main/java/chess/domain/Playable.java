@@ -2,6 +2,8 @@ package chess.domain;
 
 public interface Playable {
 
+    Boolean isPLayersTurn(String colour);
+
     public enum PieceEnum {
         Empty,
         Pawn,
@@ -18,6 +20,8 @@ public interface Playable {
     String getNameOfPlayerOne();
     String getNameOfPlayerTwo();
     void playPiece(int[] originSquare, int[] targetSquare);
+
+
 
 
 }
