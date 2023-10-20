@@ -45,6 +45,7 @@ public class Knight extends Piece {
     //Stays the same as pawn
     public void updateSquares(Square originSquare, Square targetSquare){
         targetSquare.update(this,targetSquare.getLocation());
+        this.square = targetSquare;
         originSquare.empty();
     }
 
