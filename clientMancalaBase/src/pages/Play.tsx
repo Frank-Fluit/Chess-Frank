@@ -5,19 +5,20 @@ import { useState } from 'react' // based on old file
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
-    const [selectedLocation, setSelectedLocation] = useState(''); // To choose a location (based on old file)
-    const [moveLocation, setMoveLocation] = useState(''); // To choose a move (based on old file)
+    const [originSquare, setoriginSquare] = useState([null, null]); // To choose a location (based on old file)
+    const [targetSquare, setTargetSquare] = useState([null, null]); 
 
-    async function doMove(bowlToPlay: number) {
+    async function doMove(originSquare: number[],targetSquare: number[]) {
       try {
-        const response = await fetch("mancala/api/play", {
+        const response = await fetch("api/playgame", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            bowlToPlay: bowlToPlay,
+            originSquare: originSquare, // Updated the object properties
+            targetSquare: targetSquare, // Updated the object properties
           }),
         });
 
@@ -32,10 +33,24 @@ export const Play = () => {
       }
     }
 
-    function handleBowlClick(bowlNumber: number) {
-        doMove(bowlNumber);
-  }
+    
 
+
+    function handleSquareClick(row, col) {
+      const location = [7-row, col];
+      if (originSquare[0] == null) {
+        // If no origin selected, set the selected piece as the origin
+        setoriginSquare(location);
+      } else {
+        // If origin already selected, set the selected location as the target and make the move
+        setTargetSquare(location);
+        doMove(originSquare, location);
+  
+        // Clear both selections after the move
+        setoriginSquare([null, null]);
+        setTargetSquare([null, null]);
+      }
+    }
 
    return   <div className="w-full max-w-md">
 
@@ -48,7 +63,7 @@ export const Play = () => {
         <div key={colIndex} className="w-20 h-20">
           {gameState.squares.slice().reverse().map((row, rowIndex) => (
             <div key={rowIndex} className={`w-full h-full border border-gray-300 flex items-center justify-center
-              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-white-200' : 'bg-green-200'}`}>
+              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-white-200' : 'bg-green-200'}`} onClick={() => handleSquareClick(rowIndex, colIndex)}>
               {row[colIndex].pieceEnum !== 'Empty' ? (
 
 
@@ -115,23 +130,12 @@ export const Play = () => {
       <p className="text-xl font-bold">Player 1: {gameState?.players[0].name}</p>
     </div>
 
-    <div>
-          <p>Format: Rij[0-7], Kolom[0-7], tellen van beide begint linksonder, voorbeeld: 1,1 is een witte pion en 7,7 een zwarte toren 
-            </p><p><strong>Selecteer een stuk om te bewegen</strong> </p>
-          <input
-            type="text"
-            value={selectedLocation}
-            onChange={(e) => setSelectedLocation(e.target.value)}
-          />
-        </div>
-        <div>
-          <p><strong>Selecteer waar je het stuk heen wilt bewegen:</strong></p>
-          <input
-            type="text"
-            value={moveLocation}
-            onChange={(e) => setMoveLocation(e.target.value)}
-          />
-        </div>
+
+
+
+        
+
+        
 
 
   </div>
