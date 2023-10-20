@@ -58,6 +58,13 @@ public class Pawn extends Piece{
         if (Math.abs(colDifference)> 1){
             return false;
         }
+        if(Math.abs(colDifference)>0 && rowDifference == 0){
+            return false;
+        }
+
+        if(Math.abs(colDifference) ==0 && targetSquare.getPiece() != null){
+            return false;
+        }
         return this.getOwner().getHasTurn();
     }
 
@@ -69,6 +76,11 @@ public class Pawn extends Piece{
     }
 
     void doMove(int targetRow, int targetCol){
+
+        if(Math.abs(targetRow - this.square.getLocation()[0]) == 2){
+            this.previousLocation = this.square.getLocation();
+        }
+
         Square targetSquare = this.board.getSquares(targetRow,targetCol);
         if(targetSquare.checkIfContainsPiece()){
             targetSquare.pieceGetsTaken();

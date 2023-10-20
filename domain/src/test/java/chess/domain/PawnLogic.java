@@ -247,4 +247,9 @@ public class PawnLogic {
         assertEquals(Pawn.class, chessBoard.getSquares(4,0).getPiece().getClass());
     }
 
+    // pawn can capture sideways
+    //pionnen kunnen twee keer een dubbele zet doen
+    //pionnen kunnen rechtdoorslaan
+
+
 }

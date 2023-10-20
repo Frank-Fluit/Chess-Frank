@@ -47,6 +47,7 @@ public class King extends Piece {
 
     public void updateSquares(Square originSquare, Square targetSquare){
         targetSquare.update(this,targetSquare.getLocation());
+        this.square = targetSquare;
         originSquare.empty();
     }
 

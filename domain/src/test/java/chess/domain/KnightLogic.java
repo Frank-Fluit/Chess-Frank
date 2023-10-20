@@ -151,6 +151,13 @@ public class KnightLogic {
 
     }
 
+    @Test
+    public void testIfLocationKnightIsCorrectAfterTwoMoves(){
+        Board chessboard = new Board();
+        Square leftWhiteKnightSquare = chessboard.getSquares(0,1);
+        Knight leftWhiteKnight = (Knight) leftWhiteKnightSquare.getPiece();
+    }
+
     // hier zou ik nog verkeerde moves voor andere knight kunnen toevoegen behalve de witte knight linksonder
 
 
