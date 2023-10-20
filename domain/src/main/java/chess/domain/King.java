@@ -8,6 +8,7 @@ public class King extends Piece {
         this.owner = owner;
     }
 
+    @Override
     public void startAMove(int targetRow, int targetCol){
         if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol)){
             doMove(targetRow,targetCol);

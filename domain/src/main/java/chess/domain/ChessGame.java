@@ -1,12 +1,36 @@
 package chess.domain;
 
+
+
 public class ChessGame implements Playable{
 
     private Board chessBoard;
+    private String playerOne;
+    private String playerTwo;
 
-    public ChessGame(){
+
+    public ChessGame(String playerOne,String playerTwo){
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
         chessBoard = new Board();
     }
+
+    @Override
+    public String getNameOfPlayerOne() {
+        return this.playerOne;
+    }
+
+    @Override
+    public String getNameOfPlayerTwo() {
+        return this.playerTwo;
+    }
+
+    @Override
+    public void playPiece(int[] originSquare, int[] targetSquare) {
+        chessBoard.getSquares(originSquare[0],originSquare[1]).getPiece().startAMove(targetSquare[0],targetSquare[1]);
+
+    }
+
     @Override
     public PieceEnum getPieceForSquare(int rank, int file) {
         Square square = chessBoard.getSquares(rank, file);
@@ -40,6 +64,17 @@ public class ChessGame implements Playable{
         }
         else{
             return PieceEnum.Empty;
+        }
+    }
+
+    @Override
+    public String getColourPiece(int rank, int file) {
+        Square square = chessBoard.getSquares(rank, file);
+        if(square.getPiece() == null){
+            return "Empty";
+        }
+        else {
+            return square.getPiece().getOwner().getColour();
         }
     }
 }
