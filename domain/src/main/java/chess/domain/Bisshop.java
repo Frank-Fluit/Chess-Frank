@@ -47,7 +47,6 @@ public class Bisshop extends Piece {
             return checkIfDiagonalIsEmpty(this.getParentSquare().getLocation(), targetRow,targetCol);
         }
 
-
         else{
             return true;
         }
@@ -57,9 +56,26 @@ public class Bisshop extends Piece {
 
     private boolean checkIfDiagonalIsEmpty(int[] location, int targetRow, int targetCol) {
 
-        // add checking of the diagonal
+        int originRow = location[0];
+        int originCol = location[1];
+
+        int startRow = Math.min(targetRow, originRow);
+        int endRow = Math.max(targetRow, originRow);
+
+        int startCol = Math.min(targetCol, originCol);
+        int endCol = Math.max(targetCol, originCol);
+
+        for (int col = startCol + 1; col < endCol; col++) {
+            if (this.board.getSquares(startRow+1, col).checkIfContainsPiece()) {
+                return false;
+            }
+            startRow++;
+        }
         return true;
     }
+    // for inspiration:
+
+
 
 
     //Stays the same as pawn

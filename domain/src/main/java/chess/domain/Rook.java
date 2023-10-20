@@ -45,11 +45,11 @@ public class Rook extends Piece {
             return false;
 
         if(absColDifference >1 ){
-            return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
+            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetCol);
         }
 
         if(absRowDifference >1){
-            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetCol);
+            return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
         else{
@@ -61,12 +61,33 @@ public class Rook extends Piece {
 
     private boolean checkIfColIsEmpty(int[] location, int targetRow) {
         int originRow = location[0];
+        int columnToCheck = location[1];
+
+        int startRow = Math.min(originRow, targetRow);
+        int endRow = Math.max(originRow, targetRow);
 
 
+        for (int row = startRow + 1; row < endRow; row++) {
+            if (this.board.getSquares(row,columnToCheck).checkIfContainsPiece()) {
+                return false;
+            }
+        }
         return true;
     }
 
     private boolean checkIfRowIsEmpty(int[] location,int targetCol) {
+        int rowToCheck = location[0];
+        int originCol = location[1];
+
+        int startCol = Math.min(originCol, targetCol);
+        int endCol = Math.max(originCol, targetCol);
+
+
+        for (int col = startCol + 1; col < endCol; col++) {
+            if (this.board.getSquares(col,rowToCheck).checkIfContainsPiece()) {
+                return false;
+            }
+        }
         return true;
     }
 

@@ -48,11 +48,11 @@ public class Queen extends Piece{
         }
 
         if(absColDifference >1 && absRowDifference ==0){
-            return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow,targetCol);
+            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetCol);
         }
 
         if(absRowDifference >1 && absColDifference ==0){
-            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetRow,targetCol);
+            return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
 
@@ -63,17 +63,56 @@ public class Queen extends Piece{
 
     }
 
+
+    private boolean checkIfColIsEmpty(int[] location, int targetRow) {
+        int originRow = location[0];
+        int columnToCheck = location[1];
+
+        int startRow = Math.min(originRow, targetRow);
+        int endRow = Math.max(originRow, targetRow);
+
+
+        for (int row = startRow + 1; row < endRow; row++) {
+            if (this.board.getSquares(row,columnToCheck).checkIfContainsPiece()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkIfRowIsEmpty(int[] location,int targetCol) {
+        int rowToCheck = location[0];
+        int originCol = location[1];
+
+        int startCol = Math.min(originCol, targetCol);
+        int endCol = Math.max(originCol, targetCol);
+
+
+        for (int col = startCol + 1; col < endCol; col++) {
+            if (this.board.getSquares(col,rowToCheck).checkIfContainsPiece()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private boolean checkIfDiagonalIsEmpty(int[] location, int targetRow, int targetCol) {
 
-        // add checking of the diagonal
-        return true;
-    }
+        int originRow = location[0];
+        int originCol = location[1];
 
-    private boolean checkIfRowIsEmpty(int[] location, int targetRow, int targetCol) {
-        return true;
-    }
+        int startRow = Math.min(targetRow, originRow);
+        int endRow = Math.max(targetRow, originRow);
 
-    private boolean checkIfColIsEmpty(int[] location, int targetRow, int targetCol) {
+        int startCol = Math.min(targetCol, originCol);
+        int endCol = Math.max(targetCol, originCol);
+
+        for (int col = startCol + 1; col < endCol; col++) {
+            if (this.board.getSquares(startRow+1, col).checkIfContainsPiece()) {
+                return false;
+            }
+            startRow++;
+        }
         return true;
     }
 
