@@ -8,7 +8,7 @@ server: {proxy: {
 
                // with options: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
                '/api': {
-                 target: 'http://localhost:8080',
+                 target: 'http://localhost:8081',
                  changeOrigin: true,
                  rewrite: (path) => path.replace(/^\/api/, ''),
                }}}})

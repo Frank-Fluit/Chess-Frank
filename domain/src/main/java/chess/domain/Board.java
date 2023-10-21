@@ -5,32 +5,12 @@ public class Board {
     private Player playerWhite;
 
 
-//    public Board() {
-//        squares = new Square[8][8];
-//
-//        for (int row = 0; row < 8; row++) {
-//            for (int col = 0; col < 8; col++) {
-//                squares[row][col] = new Square();
-//
-//                if (row == 1 || row == 6) {
-//                    // Set up pawns in the second and seventh rows
-//                    squares[row][col] = new Square(new Pawn(row,col,this));
-//                }
-//            }
-//        }
-//    }
-
-
-    public Player getPlayerWhite() {
-        return playerWhite;
-    }
 
     public Board() {
 
         this.playerWhite = new Player("white");
-
-
         squares = new Square[64];
+
         for (int count = 0; count < 64; count++) {
             int row = count / 8;
             int col = count % 8;
@@ -38,6 +18,26 @@ public class Board {
             squares[count] = new Square(location,this, playerWhite);
             }
         }
+
+    
+    //constructor used for testing
+    public Board(String buildString){
+
+        this.playerWhite = new Player("white");
+        squares = new Square[64];
+
+        for (int count = 0; count < 64; count++) {
+            int row = count / 8;
+            int col = count % 8;
+            int[] location = {row, col};
+            char pieceToBuild = buildString.charAt(count);
+            squares[count] = new Square(location,this, playerWhite, pieceToBuild);
+            }
+        }
+
+
+    }
+
 
 
     public Square getSquares(int row, int col) {
@@ -49,5 +49,9 @@ public class Board {
         else{
             throw new IllegalArgumentException("Wrong input");
         }
+    }
+
+    public Player getPlayerWhite() {
+        return playerWhite;
     }
 }
