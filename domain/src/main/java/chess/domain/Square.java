@@ -20,43 +20,43 @@ public class Square {
     public Square(int[] location, Board board, Player playerWhite, char pieceToBuild){
         this.location = location;
         this.board = board;
-        if(pieceToBuild == "E"){
+        if(Character.toString(pieceToBuild).equals("E")){
             this.piece = null;
         }
-        if(pieceToBuild == "R"){
+        if(Character.toString(pieceToBuild).equals("R")){
             this.piece = new Rook(this, board, playerWhite);
         }
-        if(pieceToBuild == "H"){
+        if(Character.toString(pieceToBuild).equals("H")){
             this.piece = new Knight(this, board, playerWhite);
         }
-        if(pieceToBuild == "B"){
+        if(Character.toString(pieceToBuild).equals("B")){
             this.piece = new Bisshop(this, board, playerWhite);
         }
-        if(pieceToBuild == "Q"){
+        if(Character.toString(pieceToBuild).equals("Q")){
             this.piece = new Queen(this, board, playerWhite);
         }
-        if(pieceToBuild == "K"){
+        if(Character.toString(pieceToBuild).equals("K")){
             this.piece = new King(this, board, playerWhite);
         }
-        if(pieceToBuild == "P"){
+        if(Character.toString(pieceToBuild).equals("P")){
             this.piece = new Pawn(this, board, playerWhite);
         }
-        if(pieceToBuild == "X"){
+        if(Character.toString(pieceToBuild).equals("X")){
             this.piece = new Rook(this, board, playerWhite.getOpponent());
         }
-        if(pieceToBuild == "Y"){
+        if(Character.toString(pieceToBuild).equals("Y")){
             this.piece = new Knight(this, board, playerWhite.getOpponent());
         }
-        if(pieceToBuild == "Z"){
+        if(Character.toString(pieceToBuild).equals("Z")){
             this.piece = new Bisshop(this, board, playerWhite.getOpponent());
         }
-        if(pieceToBuild == "U"){
+        if(Character.toString(pieceToBuild).equals("U")){
             this.piece = new Queen(this, board, playerWhite.getOpponent());
         }
-        if(pieceToBuild == "V"){
+        if(Character.toString(pieceToBuild).equals("V")){
             this.piece = new King(this, board, playerWhite.getOpponent());
         }
-        if(pieceToBuild == "W"){
+        if(Character.toString(pieceToBuild).equals("W")){
             this.piece = new Pawn(this, board, playerWhite.getOpponent());
         }
 

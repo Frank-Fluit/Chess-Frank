@@ -74,7 +74,7 @@ public class Bisshop extends Piece {
 
     return true; 
 }
-    }
+
     // for inspiration:
 
 
