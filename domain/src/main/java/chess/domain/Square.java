@@ -17,6 +17,67 @@ public class Square {
         initializePiece(playerWhite);
     }
 
+    public Square(int[] location, Board board, Player playerWhite, char pieceToBuild){
+        this.location = location;
+        this.board = board;
+        if(Character.toString(pieceToBuild).equals("E")){
+            this.piece = null;
+        }
+        if(Character.toString(pieceToBuild).equals("R")){
+            this.piece = new Rook(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("H")){
+            this.piece = new Knight(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("B")){
+            this.piece = new Bisshop(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("Q")){
+            this.piece = new Queen(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("K")){
+            this.piece = new King(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("P")){
+            this.piece = new Pawn(this, board, playerWhite);
+        }
+        if(Character.toString(pieceToBuild).equals("X")){
+            this.piece = new Rook(this, board, playerWhite.getOpponent());
+        }
+        if(Character.toString(pieceToBuild).equals("Y")){
+            this.piece = new Knight(this, board, playerWhite.getOpponent());
+        }
+        if(Character.toString(pieceToBuild).equals("Z")){
+            this.piece = new Bisshop(this, board, playerWhite.getOpponent());
+        }
+        if(Character.toString(pieceToBuild).equals("U")){
+            this.piece = new Queen(this, board, playerWhite.getOpponent());
+        }
+        if(Character.toString(pieceToBuild).equals("V")){
+            this.piece = new King(this, board, playerWhite.getOpponent());
+        }
+        if(Character.toString(pieceToBuild).equals("W")){
+            this.piece = new Pawn(this, board, playerWhite.getOpponent());
+        }
+
+
+// E=Empty
+
+// R=White Rook
+// H=White Knight
+// B=White Bisshop
+// Q=White Queen
+// K=White King
+// P=White Pawn
+
+// X=Black Rook
+// Y=Black Knight
+// Z=Black Bisshop
+// U=Black Queen
+// V=Black King
+// W=Black Pawn
+    }
+
     private void initializePiece(Player playerWhite) {
         int row = location[0];
         int col = location[1];

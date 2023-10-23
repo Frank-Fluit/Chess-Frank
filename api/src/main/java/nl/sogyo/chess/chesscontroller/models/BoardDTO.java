@@ -12,8 +12,8 @@ public class BoardDTO {
     public BoardDTO(Playable chess) {
         players = new PlayerDTO[2];
 
-        players[0] = new PlayerDTO(chess, chess.getNameOfPlayerOne());
-        players[1] = new PlayerDTO(chess, chess.getNameOfPlayerTwo());
+        players[0] = new PlayerDTO(chess, chess.getNameOfPlayerOne(), "white");
+        players[1] = new PlayerDTO(chess, chess.getNameOfPlayerTwo(), "black");
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {

@@ -1,0 +1,38 @@
+{
+  "hash": "a4783950",
+  "browserHash": "815d939c",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "efe6d616",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "813e9f1b",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "f7b29d0f",
+      "needsInterop": false
+    },
+    "classnames": {
+      "src": "../../node_modules/classnames/index.js",
+      "file": "classnames.js",
+      "fileHash": "2d28e089",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-ZAUFE7H7": {
+      "file": "chunk-ZAUFE7H7.js"
+    },
+    "chunk-UXIASGQL": {
+      "file": "chunk-UXIASGQL.js"
+    }
+  }
+}
