@@ -1,32 +1,35 @@
 package chess.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RookLogic {
 
-    @Test
-    public void testMovesWhiteKing() {
-        Board chessBoard = new Board();
-        Square whiteKingSquare = chessBoard.getSquares(0, 4);
-        King whiteKing = (King) whiteKingSquare.getPiece();
+    String rookBoard = "EKKKKKKK" +
+            "RRRRRRRR" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "XXXXXXXX" +
+            "EVVVVVVV";
 
-        Square whiteKingPawnSquare = chessBoard.getSquares(1, 4);
-        Pawn whiteKingPawn = (Pawn) whiteKingPawnSquare.getPiece();
+    @ParameterizedTest
+    @ValueSource(ints = {0,1,2,3,4,5,6,7})
+    public void TestIfSingleWhiteMoveIsAllowed(int num){
+        Board chessBoard = new Board(rookBoard);
+        Square squareRow1 = chessBoard.getSquares(1,num);
+        Square targetRow2= chessBoard.getSquares(2,num +1);
+        Bisshop BishopRow1 = (Bisshop)squareRow1.getPiece();
 
-        Square blackKingPawnSquare = chessBoard.getSquares(6, 4);
-        Pawn blackKingPawn = (Pawn) blackKingPawnSquare.getPiece();
-
-        whiteKingPawn.startAMove(2, 4);
-        blackKingPawn.startAMove(5, 4);
-        whiteKing.startAMove(1, 4);
+        BishopRow1.startAMove(2,num+1);
 
 
-        assertEquals(Pawn.class, chessBoard.getSquares(2, 4).getPiece().getClass());
-        assertEquals(Pawn.class, chessBoard.getSquares(5, 4).getPiece().getClass());
-        assertEquals(King.class, chessBoard.getSquares(1, 4).getPiece().getClass());
-        assertNull(whiteKingSquare.getPiece());
+        assertEquals(Bisshop.class, targetRow2.getPiece().getClass());
+        assertNull(squareRow1.getPiece());
     }
 }
