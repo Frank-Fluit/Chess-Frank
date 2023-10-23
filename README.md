@@ -10,9 +10,9 @@ Musts:
 Implement moving Pawn
 Implement horse
 show board
-Save winner to database
+Log X to database
 Implement moving King
-Implement checkmate
+
 
 Shoulds: 
 Implement  moving Queen
@@ -20,7 +20,8 @@ Implement moving Bishop
 Implement moving Rook
 UI where you can grab and move a piece
 Implement promoting a piece
-high test coverage
+Implement checkmate
+
 
 
 Coulds:
@@ -29,8 +30,9 @@ Implement castling
 Implement en passent
 UI that shows game status during game
 
+
 Woulds:
-Be able to play against AI
+Be able to play against an engne
 play games to other people online
 
 
