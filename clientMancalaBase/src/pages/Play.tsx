@@ -134,14 +134,5 @@ export const Play = () => {
         </p>
       </p>
     </div>
-
-
-
-
-        
-
-        
-
-
   </div>
 };
