@@ -84,7 +84,7 @@ public class Rook extends Piece {
 
 
         for (int col = startCol + 1; col < endCol; col++) {
-            if (this.board.getSquares(col,rowToCheck).checkIfContainsPiece()) {
+            if (this.board.getSquares(rowToCheck,col).checkIfContainsPiece()) {
                 return false;
             }
         }
