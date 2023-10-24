@@ -34,6 +34,14 @@ public class PlayEndPoint {
         System.out.println(Arrays.toString(targetSquare));
 
         chess.playPiece(originSquare,targetSquare);
+        if(chess.isEndOfGame()){
+            System.out.println(chess.getWinner());
+
+
+            // TODO
+            // Add winner to database here
+
+        }
 
 
         return new BoardDTO(chess);

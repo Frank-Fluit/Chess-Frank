@@ -133,6 +133,8 @@ export const Play = () => {
           Current Turn: {gameState?.players[0]?.hasTurn ? gameState.players[0].name + " (white)" : gameState.players[1].name + " (black)"}
         </p>
       </p>
+
+      <p className="text-xl font-bold">Current GameState: {gameState?.gameState.gameState}</p>
     </div>
   </div>
 };
