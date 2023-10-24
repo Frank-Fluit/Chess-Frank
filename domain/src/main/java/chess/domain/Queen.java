@@ -101,18 +101,17 @@ public class Queen extends Piece{
         int originRow = location[0];
         int originCol = location[1];
 
-        int startRow = Math.min(targetRow, originRow);
-        int endRow = Math.max(targetRow, originRow);
+        int colIterator = (targetCol > originCol) ? 1 : -1;
+        int rowIterator = (targetRow > originRow) ? 1 : -1;
 
-        int startCol = Math.min(targetCol, originCol);
-        int endCol = Math.max(targetCol, originCol);
-
-        for (int col = startCol + 1; col < endCol; col++) {
-            if (this.board.getSquares(startRow+1, col).checkIfContainsPiece()) {
+        for (int row = originRow + rowIterator, col = originCol + colIterator;
+             row != targetRow && col != targetCol;
+             row += rowIterator, col += colIterator) {
+            if (this.board.getSquares(row, col).checkIfContainsPiece()) {
                 return false;
             }
-            startRow++;
         }
+
         return true;
     }
 

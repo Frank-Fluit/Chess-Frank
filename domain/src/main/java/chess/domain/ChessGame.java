@@ -32,6 +32,68 @@ public class ChessGame implements Playable{
 
     }
 
+    @Override
+    public boolean isEndOfGame() {
+        int kingCount = 0; // Initialize a count for kings
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if (chessBoard.getSquares(row, col).getPiece() != null) {
+                    if (chessBoard.getSquares(row, col).getPiece().getClass().equals(King.class)) {
+                        kingCount++; // Increment the count for kings
+                    }
+                }
+            }
+        }
+
+        return kingCount == 1; // Return true if there's only one king left
+    }
+
+ //   @Override
+//    public Winner getWinner() {
+//        if(!isEndOfGame()){
+//            return Winner.NO_ONE;
+//        }
+//        for (int row = 0; row < 8; row++) {
+//            for (int col = 0; col < 8; col++) {
+//                if (chessBoard.getSquares(row, col).getPiece() != null) {
+//                    if (chessBoard.getSquares(row, col).getPiece().getClass().equals(King.class)) {
+//                        if(chessBoard.getSquares(row,col).getPiece().getOwner().getColour().equals("white")) {
+//                            return Winner.PLAYER_1;
+//                        }
+//                        else{
+//                            return Winner.PLAYER_2;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return Winner.NO_ONE;
+//    }
+    public Winner getWinner() {
+        if (!isEndOfGame()) {
+            return Winner.NO_ONE;
+        }
+
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Piece piece = chessBoard.getSquares(row, col).getPiece();
+
+                if (piece != null && piece instanceof King) {
+                    Player owner = piece.getOwner();
+
+                    if (owner.getColour().equals("white")) {
+                        return Winner.PLAYER_1;
+                    } else {
+                        return Winner.PLAYER_2;
+                    }
+                }
+            }
+        }
+
+        return Winner.NO_ONE;
+    }
+
 
     @Override
     public Boolean isPLayersTurn(String colour) {

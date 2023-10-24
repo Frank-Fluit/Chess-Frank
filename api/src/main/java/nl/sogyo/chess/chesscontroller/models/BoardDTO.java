@@ -9,8 +9,10 @@ public class BoardDTO {
 
     SquareDTO[][] squares = new SquareDTO[8][8];
     private PlayerDTO[] players;
+    private GameStateDTO gameState;
     public BoardDTO(Playable chess) {
         players = new PlayerDTO[2];
+        gameState = new GameStateDTO(chess);
 
         players[0] = new PlayerDTO(chess, chess.getNameOfPlayerOne(), "white");
         players[1] = new PlayerDTO(chess, chess.getNameOfPlayerTwo(), "black");
@@ -38,6 +40,11 @@ public class BoardDTO {
         this.players = players;
     }
 
+    public GameStateDTO getGameState() {
+        return gameState;
+    }
 
-
+    public void setGameState(GameStateDTO gameState) {
+        this.gameState = gameState;
+    }
 }

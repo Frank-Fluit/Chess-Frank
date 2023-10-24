@@ -6,8 +6,15 @@ import { FloatingInput } from "../components/FloatingInput";
 import classNames from "classnames";
 import { Alert } from "../components/Alert";
 import backgroundImage from '../assets/chessImage.jpg';
+import { useNavigate } from "react-router-dom";
+
 
 export const Start = () => {
+
+    const handleMatchHistoryClick = () => {
+        navigate("/MatchHistory");
+    };
+    const navigate = useNavigate();
     const { setGameState } = useMancalaGame();
 
     const [player1, setPlayer1] = useState("");
@@ -96,6 +103,38 @@ export const Start = () => {
                                         Play
                                     </button>
                                 </li>
+                                                <button
+                                                    type="button"
+                                                    className={classNames(
+                                                        "rounded border-2",
+                                                        "border-neutral-50",
+                                                        "px-7",
+                                                        "pb-[8px]",
+                                                        "pt-[10px]",
+                                                        "text-sm",
+                                                        "font-medium",
+                                                        "uppercase",
+                                                        "leading-normal",
+                                                        "text-neutral-50",
+                                                        "transition duration-150",
+                                                        "ease-in-out",
+                                                        "hover:border-neutral-100",
+                                                        "hover:text-neutral-100",
+                                                        "focus:border-neutral-100",
+                                                        "focus:text-neutral-100",
+                                                        "focus:outline-none",
+                                                        "focus:ring-0",
+                                                        "active:border-neutral-200",
+                                                        "active:text-neutral-200",
+                                                        "hover:bg-neutral-100",
+                                                        "hover:bg-opacity-10"
+                                                    )}
+                                                    data-te-ripple-init
+                                                    data-te-ripple-color="light"
+                                                     onClick={handleMatchHistoryClick}
+                                                >
+                                                    Match History
+                                                </button>
                             </ol>
                         </form>
                     </div>
