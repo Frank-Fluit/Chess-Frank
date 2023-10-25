@@ -55,7 +55,7 @@ export const Play = () => {
    return   <div className="w-full max-w-md">
 
     <div className="text-center mb-4">
-      <p className="text-xl font-bold">Player 2: {gameState?.players[1].name}</p>
+      <p className="text-xl font-bold">Speler 2: {gameState?.players[1].name}</p>
     </div>
 
     <div className="grid grid-cols-8 gap-0" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
@@ -127,14 +127,14 @@ export const Play = () => {
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
     <div className="text-center mt-40">
-      <p className="text-xl font-bold">Player 1: {gameState?.players[0].name}</p>
+      <p className="text-xl font-bold">Speler 1: {gameState?.players[0].name}</p>
       <p className="text-xl font-bold">
         <p className="text-xl font-bold">
-          Current Turn: {gameState?.players[0]?.hasTurn ? gameState.players[0].name + " (white)" : gameState.players[1].name + " (black)"}
+          Aan de beurt: {gameState?.players[0]?.hasTurn ? gameState.players[0].name + " (wit)" : gameState.players[1].name + " (zwart)"}
         </p>
       </p>
 
-      <p className="text-xl font-bold">Current GameState: {gameState?.gameState.gameState}</p>
+
     </div>
   </div>
 };

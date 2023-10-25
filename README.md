@@ -10,7 +10,7 @@ Musts:
 Implement moving Pawn
 Implement horse
 show board
-Log X to database
+Log winner to database
 Implement moving King
 
 
