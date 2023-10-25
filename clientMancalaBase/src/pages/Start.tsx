@@ -47,7 +47,7 @@ export const Start = () => {
                                 <li className="mt-4">
                                     <FloatingInput
                                         id="player1"
-                                        label="Name of player 1"
+                                        label="Naam Speler 1 wit"
                                         value={player1}
                                         onChange={e => setPlayer1(e.target.value)}
                                         hasError={player1 !== "" && player2 !== "" && player1 === player2}
@@ -56,7 +56,7 @@ export const Start = () => {
                                 <li className="mt-4">
                                     <FloatingInput
                                         id="player2"
-                                        label="Name of player 2"
+                                        label="Naam Speler 2 zwart"
                                         value={player2}
                                         onChange={e => setPlayer2(e.target.value)}
                                         hasError={player1 !== "" && player2 !== "" && player1 === player2}
@@ -100,7 +100,7 @@ export const Start = () => {
                                         disabled={!valid}
                                         onClick={() => onSubmit()}
                                     >
-                                        Play
+                                        Start met Schaken
                                     </button>
                                 </li>
                                                 <button
@@ -133,7 +133,7 @@ export const Start = () => {
                                                     data-te-ripple-color="light"
                                                      onClick={handleMatchHistoryClick}
                                                 >
-                                                    Match History
+                                                   Historische Schaakuitslagen
                                                 </button>
                             </ol>
                         </form>

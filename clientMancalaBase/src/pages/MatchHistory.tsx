@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const MatchHistory = () => {
+import React from 'react';
+import background from '../assets/AngryCat.jpg';
+
+export const MatchHistory = () => {
   const [matchHistory, setMatchHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,21 +35,39 @@ const MatchHistory = () => {
   }
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
+      <div>
+        <style>
+          {`
+            body {
+              background-image: url(${background});
+              background-size: cover;
+              background-repeat: no-repeat;
+            }
+          `}
+        </style>
+    <div className="max-w-lg mx-auto p-4 border rounded bg-gray-100 m-4">
+      <h2 className="text-2xl mb-4">Uitslagen Schaak</h2>
 
       {loading ? (
-        <p>Loading...</p>
+        <p className="italic text-gray-600">Loading...</p>
       ) : (
-        <ul>
+        <div>
+          <div className="flex">
+            <div className="w-1/2 font-bold">Naam</div>
+            <div className="w-1/2 font-bold text-right">Gewonnen Potjes</div>
+          </div>
           {matchHistory.map((match, index) => (
-            <li key={index}>
-              {/* Display the match history data here */}
-              {match[0] + " " + match[1] }
-            </li>
+            <div
+              key={index}
+              className="flex mb-2"
+            >
+              <div className="w-1/2">{match[0]}</div>
+              <div className="w-1/2 text-right">{match[1]}</div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
+    </div>
     </div>
   );
 };
