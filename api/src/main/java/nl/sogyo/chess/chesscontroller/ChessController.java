@@ -19,7 +19,6 @@ import java.util.List;
 public class ChessController {
 
 
-    //@GetMapping(produces = "application/json")
     @PostMapping(produces = "application/json")
     public BoardDTO hello(@RequestBody PlayerInputDTO players, HttpSession session){
 
@@ -27,10 +26,10 @@ public class ChessController {
 
         String player1Name = players.getPlayer1Name();
         String player2Name = players.getPlayer2Name();
-        System.out.println(player1Name);
-        System.out.println(player2Name);
+        System.out.println("Player 1 (white) is:" + player1Name);
+        System.out.println("Player 2 (black) is" + player2Name);
 
-        //hier gaat iets fout met naam zetten
+
         Playable chess = new ChessGame(player1Name,player2Name);
         session.setAttribute("chessboardSession", chess);
 
