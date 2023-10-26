@@ -10,9 +10,14 @@ public class Knight extends Piece {
     // Stays the same as pawn
     @Override
     public void startAMove(int targetRow, int targetCol){
-        if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol)){
+        if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol ) && this.getOwner().getHasTurn()){
             doMove(targetRow,targetCol);
         }
+    }
+
+    @Override
+    protected boolean seesKing(Square squareEnemyKing) {
+        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
     }
 
     //Stays the same as pawn
@@ -36,9 +41,7 @@ public class Knight extends Piece {
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
-        if(!this.getOwner().getHasTurn()){
-            return false;
-        }
+
 
         return (absColDifference == 2 && absRowDifference == 1) || (absRowDifference == 2 && absColDifference == 1);
     }

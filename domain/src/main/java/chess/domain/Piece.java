@@ -11,12 +11,12 @@ public abstract class Piece {
 
     }
 
-    public Piece(Square square, Board board){
+    public Piece(Square square, Board board) {
         this.square = square;
         this.board = board;
     }
 
-    public Square getParentSquare(){
+    public Square getParentSquare() {
         return this.square;
     }
 
@@ -25,6 +25,24 @@ public abstract class Piece {
     }
 
     public abstract void startAMove(int targetRow, int targetCol);
+
+    protected abstract boolean seesKing(Square squareEnemyKing);
+
+    public Boolean askKingIfInCheck() {
+        if(this.getClass() == King.class){
+            return false;
+        }
+        for (int i = 0; i <= 63; i++) {
+            Square square = board.getSquareIndex(i);
+            Piece piece = square.getPiece();
+            if (piece != null && piece instanceof King && piece.getOwner() == this.getOwner()) {
+                return ((King) piece).isCheck();
+            }
+        }
+
+        return null;
+    }
+
 }
 
 

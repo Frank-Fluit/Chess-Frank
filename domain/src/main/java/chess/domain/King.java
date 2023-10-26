@@ -15,6 +15,11 @@ public class King extends Piece {
         }
     }
 
+    @Override
+    protected boolean seesKing(Square squareEnemyKing) {
+        return false;
+    }
+
 
     private boolean targetSquareOnBoard(int targetRow, int targetCol) {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol <8);
@@ -61,5 +66,16 @@ public class King extends Piece {
         Square originSquare = this.getParentSquare();
         updateSquares(originSquare,targetSquare);
         this.getOwner().switchTurn();
+    }
+    Boolean isCheck(){
+        for (int i = 0; i <= 63; i++) {
+            Square square = board.getSquareIndex(i);
+            Piece piece = square.getPiece();
+            if (piece != null && !(piece instanceof King) && piece.getOwner() != this.getOwner()) {
+                if(piece.seesKing(this.square))
+                    return true;
+            }
+            }
+        return false;
     }
 }
