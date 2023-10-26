@@ -10,9 +10,16 @@ public class Queen extends Piece{
 
     @Override
     public void startAMove(int targetRow, int targetCol){
-        if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol)){
+
+
+        if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol) && this.getOwner().getHasTurn()){
             doMove(targetRow,targetCol);
         }
+    }
+
+    @Override
+    protected boolean seesKing(Square squareEnemyKing) {
+        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
     }
 
     //Stays the same as knight
@@ -36,9 +43,6 @@ public class Queen extends Piece{
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
-        if(!this.getOwner().getHasTurn()){
-            return false;
-        }
 
         if(absColDifference != absRowDifference && absColDifference != 0 && absRowDifference!= 0)
             return false;

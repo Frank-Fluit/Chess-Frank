@@ -51,6 +51,15 @@ public class Board {
         }
     }
 
+    public Square getSquareIndex(int index) {
+
+        if(index >= 0 && index < 64){
+            return squares[index];}
+        else{
+            throw new IllegalArgumentException("Wrong input");
+        }
+    }
+
     public Player getPlayerWhite() {
         return playerWhite;
     }
