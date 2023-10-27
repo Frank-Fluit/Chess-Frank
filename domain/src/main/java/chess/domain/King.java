@@ -1,11 +1,13 @@
 package chess.domain;
 
 public class King extends Piece {
+    Boolean checkMate;
 
     public King(Square square,Board board, Player owner) {
         this.square = square;
         this.board = board;
         this.owner = owner;
+        this.checkMate = false;
     }
 
     @Override
@@ -21,13 +23,14 @@ public class King extends Piece {
     }
 
 
+
+
     private boolean targetSquareOnBoard(int targetRow, int targetCol) {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol <8);
     }
 
-    private boolean isValidMove(int targetRow, int targetCol) {
+    public boolean isValidMove(int targetRow, int targetCol) {
 
-        //check is there is a piece of owner in targetLocation
         Square targetSquare = board.getSquares(targetRow,targetCol);
         if (targetSquare.getPiece() != null && targetSquare.getPiece().getOwner() == this.getOwner()){
             return false;
@@ -39,7 +42,7 @@ public class King extends Piece {
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
-        //check if owner has turn
+
         if(!this.getOwner().getHasTurn()){
             return false;
         }
@@ -65,6 +68,10 @@ public class King extends Piece {
         }
         Square originSquare = this.getParentSquare();
         updateSquares(originSquare,targetSquare);
+        if(this.isOpponentKingCheckMate()){
+            setOpponentCheckMate();
+        }
+
         this.getOwner().switchTurn();
     }
     Boolean isCheck(){
@@ -75,7 +82,27 @@ public class King extends Piece {
                 if(piece.seesKing(this.square))
                     return true;
             }
-            }
+        }
         return false;
     }
+
+    public boolean isCheckMate() {
+        if (!isCheck()) {
+            return false;
+        }
+        for (int i = 0; i < 64; i++) {
+            Square square = board.getSquareIndex(i);
+            Piece piece = square.getPiece();
+            //all own pieces are checked if they can solve chech
+            if (piece != null && piece.getOwner() == this.getOwner() && piece.canItSolveCheck(this.square)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setCheckMate(Boolean checkMate) {
+        this.checkMate = checkMate;
+    }
+
 }

@@ -61,21 +61,7 @@ public class Square {
         }
 
 
-// E=Empty
 
-// R=White Rook
-// H=White Knight
-// B=White Bisshop
-// Q=White Queen
-// K=White King
-// P=White Pawn
-
-// X=Black Rook
-// Y=Black Knight
-// Z=Black Bisshop
-// U=Black Queen
-// V=Black King
-// W=Black Pawn
     }
 
     private void initializePiece(Player playerWhite) {
@@ -100,6 +86,7 @@ public class Square {
                 piece = new Queen(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
             } else if (col == 4) {
                 piece = new King(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+
             }
         }
     }

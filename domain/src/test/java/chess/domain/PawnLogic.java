@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PawnLogic {
 
-    // Does not test if
-    
+
     @ParameterizedTest
     @ValueSource(ints = {0,1,2,3,4,5,6,7})
     public void testIfDoMoveChangesPositionPawn(int num) {
@@ -125,24 +124,18 @@ public class PawnLogic {
     public void testIfFourMovesAreAllowed(){
         Board chessBoard = new Board();
 
-        //White Pawn
         Pawn pawn1_0  = (Pawn) chessBoard.getSquares(1,0).getPiece();
         pawn1_0.startAMove(2,0);
 
-        //Black Pawn
         Pawn pawn6_0 = (Pawn) chessBoard.getSquares(6,0).getPiece();
         pawn6_0.startAMove(5,0);
 
-        //White Pawn
         Pawn pawn2_0 = (Pawn) chessBoard.getSquares(2,0).getPiece();
         pawn2_0.startAMove(3,0);
 
-        //Black Pawn
         Pawn pawn5_0 = (Pawn) chessBoard.getSquares(5,0).getPiece();
         pawn5_0.startAMove(4,0);
 
-
-        //Access square (3,0)
         assertEquals(Pawn.class, chessBoard.getSquares(3,0).getPiece().getClass());
         assertEquals(Pawn.class, chessBoard.getSquares(4,0).getPiece().getClass());
 
@@ -209,33 +202,24 @@ public class PawnLogic {
     public void testIfImpossibleToJumpOverOtherPieceOnFirstMove(){
         Board chessBoard = new Board();
 
-        //White Pawn
         Pawn pawn1_0  = (Pawn) chessBoard.getSquares(1,0).getPiece();
         pawn1_0.startAMove(2,0);
 
-
-        //Black Pawn
         Pawn pawn6_4 = (Pawn) chessBoard.getSquares(6,4).getPiece();
         pawn6_4.startAMove(4,4);
 
-
-        // White Pawn
         Pawn pawn2_0  = (Pawn) chessBoard.getSquares(2,0).getPiece();
         pawn2_0.startAMove(3,0);
 
-        //Black Pawn
         Pawn pawn4_4 = (Pawn) chessBoard.getSquares(4,4).getPiece();
         pawn4_4.startAMove(3,4); // This move does not work?
 
-       // White Pawn
         Pawn pawn3_0  = (Pawn) chessBoard.getSquares(3,0).getPiece();
         pawn3_0.startAMove(4,0);
 
-      //Black Pawn
         Pawn pawn3_4 = (Pawn) chessBoard.getSquares(3,4).getPiece();
         pawn3_4.startAMove(2,4);
 
-       // Other White Pawn
        Pawn pawn1_4 = (Pawn) chessBoard.getSquares(1,4).getPiece();
        pawn1_4.startAMove(3,4);
 
@@ -246,10 +230,5 @@ public class PawnLogic {
         assertEquals(Pawn.class, chessBoard.getSquares(2,4).getPiece().getClass());
         assertEquals(Pawn.class, chessBoard.getSquares(4,0).getPiece().getClass());
     }
-
-    // pawn can capture sideways
-    //pionnen kunnen twee keer een dubbele zet doen
-    //pionnen kunnen rechtdoorslaan
-
 
 }
