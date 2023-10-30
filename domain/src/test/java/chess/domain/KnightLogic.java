@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightLogic {
 
-    //legalMoves
 
     @Test
     public void testMovesLeftWhiteKnight_1() {

@@ -32,44 +32,26 @@ public class ChessGame implements Playable{
 
     }
 
+
+    // update next two to include checkmate state
     @Override
     public boolean isEndOfGame() {
-        int kingCount = 0; // Initialize a count for kings
+
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (chessBoard.getSquares(row, col).getPiece() != null) {
                     if (chessBoard.getSquares(row, col).getPiece().getClass().equals(King.class)) {
-                        kingCount++; // Increment the count for kings
+                        King king = (King) chessBoard.getSquares(row, col).getPiece();
+                        if(king.isCheckMate()){return true;}
                     }
                 }
             }
         }
-
-        return kingCount == 1; // Return true if there's only one king left
+        return false;
     }
 
- //   @Override
-//    public Winner getWinner() {
-//        if(!isEndOfGame()){
-//            return Winner.NO_ONE;
-//        }
-//        for (int row = 0; row < 8; row++) {
-//            for (int col = 0; col < 8; col++) {
-//                if (chessBoard.getSquares(row, col).getPiece() != null) {
-//                    if (chessBoard.getSquares(row, col).getPiece().getClass().equals(King.class)) {
-//                        if(chessBoard.getSquares(row,col).getPiece().getOwner().getColour().equals("white")) {
-//                            return Winner.PLAYER_1;
-//                        }
-//                        else{
-//                            return Winner.PLAYER_2;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return Winner.NO_ONE;
-//    }
+
     public Winner getWinner() {
         if (!isEndOfGame()) {
             return Winner.NO_ONE;
@@ -81,11 +63,12 @@ public class ChessGame implements Playable{
 
                 if (piece != null && piece instanceof King) {
                     Player owner = piece.getOwner();
+                    King king = (King) piece;
 
-                    if (owner.getColour().equals("white")) {
-                        return Winner.PLAYER_1;
-                    } else {
+                    if (owner.getColour().equals("white") && king.isCheckMate()) {
                         return Winner.PLAYER_2;
+                    } else {
+                        return Winner.PLAYER_1;
                     }
                 }
             }

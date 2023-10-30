@@ -22,21 +22,19 @@ public class Queen extends Piece{
         return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
     }
 
-    //Stays the same as knight
+
+
     private boolean targetSquareOnBoard(int targetRow, int targetCol) {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol <8);
     }
 
-    private boolean isValidMove(int targetRow, int targetCol) {
+    public boolean isValidMove(int targetRow, int targetCol) {
 
-
-        //stays the same as knight, checks If targetsquare contains piece of owner
         Square targetSquare = board.getSquares(targetRow,targetCol);
         if (targetSquare.getPiece() != null && targetSquare.getPiece().getOwner() == this.getOwner()){
             return false;
         }
 
-        //stays the same as knight
         int[] location = this.getParentSquare().getLocation();
         int originRow = location[0];
         int originCol = location[1];
@@ -57,6 +55,10 @@ public class Queen extends Piece{
 
         if(absRowDifference >1 && absColDifference ==0){
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
+        }
+
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
         }
 
 
@@ -120,7 +122,6 @@ public class Queen extends Piece{
     }
 
 
-    //Stays the same as pawn
     public void updateSquares(Square originSquare, Square targetSquare){
         targetSquare.update(this,targetSquare.getLocation());
         this.square = targetSquare;
@@ -128,7 +129,6 @@ public class Queen extends Piece{
     }
 
 
-    //stays the same
     void doMove(int targetRow, int targetCol){
         Square targetSquare = this.board.getSquares(targetRow,targetCol);
         if(targetSquare.checkIfContainsPiece()){
@@ -136,6 +136,9 @@ public class Queen extends Piece{
         }
         Square originSquare = this.getParentSquare();
         updateSquares(originSquare,targetSquare);
+        if(this.isOpponentKingCheckMate()){
+            setOpponentCheckMate();
+        }
         this.getOwner().switchTurn();
     }
 }

@@ -19,8 +19,7 @@ public class Board {
             }
         }
 
-    
-    //constructor used for testing
+
     public Board(String buildString){
 
         this.playerWhite = new Player("white");

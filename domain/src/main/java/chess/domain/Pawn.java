@@ -24,12 +24,16 @@ public class Pawn extends Piece {
     protected boolean seesKing(Square squareEnemyKing) {
         return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
     }
+    @Override
+    protected boolean canItSolveCheck(Square squareParentKing) {
+        return false;
+    }
 
     private boolean targetSquareOnBoard(int targetRow, int targetCol) {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8);
     }
 
-    private boolean isValidMove(int targetRow, int targetCol) {
+    public boolean isValidMove(int targetRow, int targetCol) {
         Square targetSquare = board.getSquares(targetRow, targetCol);
         if (targetSquare.getPiece() != null && targetSquare.getPiece().getOwner() == this.getOwner()) {
             return false;
@@ -60,6 +64,11 @@ public class Pawn extends Piece {
         if (Math.abs(rowDifference) > 2) {
             return false;
         }
+        if (Math.abs(rowDifference) == 2 && Math.abs(colDifference) !=0 ) {
+            return false;
+        }
+
+
         if (Math.abs(colDifference) > 1) {
             return false;
         }
@@ -68,6 +77,10 @@ public class Pawn extends Piece {
         }
 
         if (Math.abs(colDifference) == 0 && targetSquare.getPiece() != null) {
+            return false;
+        }
+
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
             return false;
         }
         return true;
@@ -92,10 +105,13 @@ public class Pawn extends Piece {
         }
         Square originSquare = this.getParentSquare();
         updateSquares(originSquare, targetSquare);
+        if(this.isOpponentKingCheckMate()){
+            setOpponentCheckMate();
+        }
         this.getOwner().switchTurn();
+
+
     }
-
-
 
 
 }
