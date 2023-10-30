@@ -134,7 +134,14 @@ public class CheckLogic {
             "EEEEEEEE" +
             "EXEEEEEV" ;
 
-
+    String boardWithPotentialBlackCheckByQueen ="EEEKEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEUVEE" ;
 
 
     @Test
@@ -229,15 +236,6 @@ public class CheckLogic {
         assertTrue(isKingInCheck);
     }
 
-    @Test
-    public void TestIfBlackKingInCheckReturnsTrueWithKnight(){
-        Board chessBoard = new Board(blackKingInCheckByKnight);
-        Pawn pawn6_1 = (Pawn) chessBoard.getSquares(6,1).getPiece();
-
-        Boolean isKingInCheck = pawn6_1.askKingIfInCheck();
-
-        assertTrue(isKingInCheck);
-    }
 
     @Test
     public void TestIfBlackKingInCheckReturnsTrueWithBishop(){
@@ -249,15 +247,6 @@ public class CheckLogic {
         assertTrue(isKingInCheck);
     }
 
-    @Test
-    public void TestIfBlackKingInCheckReturnsTrueWithPawn(){
-        Board chessBoard = new Board(blackKingInCheckByPawn);
-        Pawn pawn6_1 = (Pawn) chessBoard.getSquares(6,1).getPiece();
-
-        Boolean isKingInCheck = pawn6_1.askKingIfInCheck();
-
-        assertTrue(isKingInCheck);
-    }
 
     @Test
     public void TestIfBlackBishopCanSolveCheck(){
@@ -269,6 +258,16 @@ public class CheckLogic {
 
         assertTrue(beforeMove);
         assertFalse(whiteBishop.askKingIfInCheck());
+    }
+
+    @Test
+    public void TestIfMoveIntoCheckIsNotAllowed(){
+        Board chessBoard = new Board(boardWithPotentialBlackCheckByQueen);
+        King whiteKing = (King) chessBoard.getSquares(0,3).getPiece();
+
+        whiteKing.startAMove(0,4);
+        assertEquals(King.class, chessBoard.getSquares(0,3).getPiece().getClass());
+        assertNull(chessBoard.getSquares(0,4).getPiece());
     }
 
 

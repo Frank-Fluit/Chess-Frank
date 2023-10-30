@@ -10,6 +10,10 @@ public class King extends Piece {
         this.checkMate = false;
     }
 
+    public Boolean getCheckMate() {
+        return checkMate;
+    }
+
     @Override
     public void startAMove(int targetRow, int targetCol){
         if(isValidMove(targetRow,targetCol) && targetSquareOnBoard(targetRow, targetCol)){
@@ -46,6 +50,11 @@ public class King extends Piece {
         if(!this.getOwner().getHasTurn()){
             return false;
         }
+
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
         return (absColDifference == 1 && absRowDifference == 1) ||
                 (absColDifference == 1 && absRowDifference == 0) ||
                 (absColDifference == 0 && absRowDifference == 1);
@@ -98,6 +107,7 @@ public class King extends Piece {
                 return false;
             }
         }
+        // this should be reached when no false is returned as a result of no pieces that can solve the checkmate
         return true;
     }
 

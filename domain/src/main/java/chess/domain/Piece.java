@@ -30,14 +30,14 @@ public abstract class Piece {
 
 
     public Boolean askKingIfInCheck() {
-        if(this.getClass() == King.class){
-            return false;
-        }
+
         for (int i = 0; i <= 63; i++) {
             Square square = board.getSquareIndex(i);
             Piece piece = square.getPiece();
-            if (piece != null && piece instanceof King && piece.getOwner() == this.getOwner()) {
-                return ((King) piece).isCheck();
+            if (square.getPiece() != null && square.getPiece() instanceof King && square.getPiece().getOwner() == this.getOwner()) {
+                King king = (King) square.getPiece();
+                boolean isCheck = king.isCheck();
+                return isCheck;
             }
         }
 
@@ -72,7 +72,8 @@ public abstract class Piece {
         Boolean solvesCheck = false;
         Piece temporaryPiece = null;
 
-        // saves piece temporary if necessary
+
+
         if(targetSquare.checkIfContainsPiece()){
             temporaryPiece =targetSquare.getPiece();
             targetSquare.pieceGetsTaken();
@@ -81,11 +82,17 @@ public abstract class Piece {
         targetSquare.update(this,targetSquare.getLocation());
         originSquare.empty();
 
-        // Here is the cause of the bug!!!
+        this.square = targetSquare;
+
+
+        // the king should be in check here , so the return of asKingIfinCheck Should be false
         solvesCheck = !this.askKingIfInCheck();
         originSquare.update(this,originSquare.getLocation());
         targetSquare.empty();
         targetSquare.update(temporaryPiece, targetSquare.getLocation());
+        this.square = originSquare;
+
+        // hier ook verwijzing van piece zelf updatej
 
         return solvesCheck;
 
@@ -100,6 +107,9 @@ public abstract class Piece {
             int targetcol = targetSquare.getLocation()[1];
             if(isValidMove(targetrow,targetcol)){
                 checkCanBeSolved = this.checkMoveDoesNotLeadToCheck(this.getParentSquare(), targetSquare);
+                if(checkCanBeSolved){
+                    return checkCanBeSolved;
+                }
             }
         }
         return checkCanBeSolved;

@@ -57,6 +57,10 @@ public class Queen extends Piece{
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
 
         else{
             return true;

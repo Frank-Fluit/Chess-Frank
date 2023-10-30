@@ -74,6 +74,10 @@ public class Pawn extends Piece {
         if (Math.abs(colDifference) == 0 && targetSquare.getPiece() != null) {
             return false;
         }
+
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
         return true;
     }
 

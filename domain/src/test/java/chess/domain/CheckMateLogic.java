@@ -34,6 +34,15 @@ public class CheckMateLogic {
             "EEEEEEWE" +
             "EEEEEEEV" ;
 
+    String backRankMateWithTwoRooksMoveBefore ="QEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "EEEEEEEE" +
+            "REEEEEEE" +
+            "EREEEEEE" +
+            "EEEEEEEV" ;
+
 
     @Test
     public void TestIfKingInCheckReturnsFalse(){
@@ -66,6 +75,18 @@ public class CheckMateLogic {
         Boolean isCheckMate = king7_7.isCheckMate();
 
         assertFalse(isCheckMate);
+    }
+
+    @Test
+    public void TestIfKingSeesisCheckMateAfterAttackByTwoRooks() {
+        Board chessBoard = new Board(backRankMateWithTwoRooksMoveBefore);
+        King blackKing7_7 = (King) chessBoard.getSquares(7, 7).getPiece();
+        Rook whiteRook = (Rook) chessBoard.getSquares(5,0).getPiece();
+
+        whiteRook.startAMove(7, 0);
+        Boolean isCheckMate = blackKing7_7.isCheckMate();
+
+        assertTrue(isCheckMate);
     }
 
 }
