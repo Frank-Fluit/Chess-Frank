@@ -64,6 +64,11 @@ public class Pawn extends Piece {
         if (Math.abs(rowDifference) > 2) {
             return false;
         }
+        if (Math.abs(rowDifference) == 2 && Math.abs(colDifference) !=0 ) {
+            return false;
+        }
+
+
         if (Math.abs(colDifference) > 1) {
             return false;
         }
