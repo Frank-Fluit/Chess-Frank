@@ -5,21 +5,27 @@ public class Square {
     int[] location;
     Board board;
     Player owner;
+    Boolean reachableSquare;
 
     public Square(){
 
     }
 
+
+
     public Square(int[] location, Board board, Player playerWhite) {
         this.location = location;
         this.board = board;
         this.piece = null;
+        this.reachableSquare = false;
+
         initializePiece(playerWhite);
     }
 
     public Square(int[] location, Board board, Player playerWhite, char pieceToBuild){
         this.location = location;
         this.board = board;
+        this.reachableSquare = false;
         if(Character.toString(pieceToBuild).equals("E")){
             this.piece = null;
         }
@@ -116,6 +122,17 @@ public class Square {
         this.location = location;
     }
 
+    public Boolean isReachableSquare() {
+        return reachableSquare;
+    }
+
+    public void updateReachableSquare(Boolean reachableSquare) {
+        this.reachableSquare = reachableSquare;
+    }
+
+    protected void resetReachableSquare(){
+        reachableSquare =false;
+    }
 
     public void pieceGetsTaken() {
         this.piece = null;

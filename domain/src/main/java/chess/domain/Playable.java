@@ -4,6 +4,8 @@ public interface Playable {
 
     Boolean isPLayersTurn(String colour);
 
+    void removeReachableFromSquares();
+
     public enum Winner {
         NO_ONE,
         PLAYER_1,
@@ -32,6 +34,10 @@ public interface Playable {
     boolean isEndOfGame();
 
     Winner getWinner();
+
+    Boolean getIsReachable(int row, int col);
+    
+    void updateSquares(int row,int col);
 
 
 
