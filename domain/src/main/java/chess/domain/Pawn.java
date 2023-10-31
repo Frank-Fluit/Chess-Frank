@@ -89,8 +89,20 @@ public class Pawn extends Piece {
     public void updateSquares(Square originSquare, Square targetSquare) {
         int[] newLocation = targetSquare.getLocation();
         this.square = targetSquare;
-        targetSquare.update(this, newLocation);
-        originSquare.empty();
+        if (willItPromote(targetSquare)) {
+            targetSquare.update(new Queen(targetSquare, this.board, this.owner), newLocation);
+            originSquare.empty();
+        } else {
+            targetSquare.update(this, newLocation);
+            originSquare.empty();
+        }
+    }
+    private boolean willItPromote(Square targetSquare) {
+
+        if(this.getOwner().getColour() == "white" && targetSquare.getLocation()[0] == 7){
+        return true;
+        }
+        return this.getOwner().getColour() == "black" && targetSquare.getLocation()[0] == 0;
     }
 
     void doMove(int targetRow, int targetCol) {
