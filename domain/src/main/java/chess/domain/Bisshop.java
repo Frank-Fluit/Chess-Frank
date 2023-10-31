@@ -52,13 +52,15 @@ public class Bisshop extends Piece {
         if(absColDifference != absRowDifference)
             return false;
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
         if(absColDifference >1 ){
             return checkIfDiagonalIsEmpty(this.getParentSquare().getLocation(), targetRow,targetCol);
         }
 
-        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
-            return false;
-        }
+
 
         else{
             return true;

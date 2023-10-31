@@ -41,6 +41,10 @@ public class Queen extends Piece{
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
 
         if(absColDifference != absRowDifference && absColDifference != 0 && absRowDifference!= 0)
             return false;
@@ -57,9 +61,7 @@ public class Queen extends Piece{
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
-        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
-            return false;
-        }
+
 
 
         else{

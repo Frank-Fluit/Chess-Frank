@@ -47,6 +47,10 @@ public class Rook extends Piece {
         if(absColDifference != 0 && absRowDifference!= 0)
             return false;
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
         if(absColDifference >1 ){
             return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetCol);
         }
@@ -55,9 +59,7 @@ public class Rook extends Piece {
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
-        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
-            return false;
-        }
+
 
         else{
             return true;

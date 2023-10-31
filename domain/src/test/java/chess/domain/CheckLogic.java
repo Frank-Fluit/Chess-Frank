@@ -143,6 +143,15 @@ public class CheckLogic {
             "EEEEEEEE" +
             "EEEEUVEE" ;
 
+    String boardWhereYouCouldCheckYourself="EUEQKBHR" +
+            "EREEPPPP" +
+            "EEEPEEEE" +
+            "EPPEHEEE" +
+            "EEEEEEBE" +
+            "EEEEEEEE" +
+            "WEWWWWWW" +
+            "XYZUVZYX" ;
+
 
     @Test
     public void TestIfKingInCheckReturnsFalse(){
@@ -268,6 +277,16 @@ public class CheckLogic {
         whiteKing.startAMove(0,4);
         assertEquals(King.class, chessBoard.getSquares(0,3).getPiece().getClass());
         assertNull(chessBoard.getSquares(0,4).getPiece());
+    }
+
+    @Test
+    public void TestIfMoveToCheckIsNotOK(){
+        Board chessboard = new Board (boardWhereYouCouldCheckYourself);
+        Queen whiteQueen = (Queen) chessboard.getSquares(0,3).getPiece();
+
+        whiteQueen.startAMove(2,1);
+        assertEquals(Queen.class, chessboard.getSquares(0,3).getPiece().getClass());
+        assertNull(chessboard.getSquares(2,1).getPiece());
     }
 
 
