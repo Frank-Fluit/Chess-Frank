@@ -19,7 +19,8 @@ public class BoardDTO {
 
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                this.squares[row][col] = new SquareDTO(chess.getPieceForSquare(row, col),chess.getColourPiece(row,col));
+                this.squares[row][col] = new SquareDTO(chess.getPieceForSquare(row, col),chess.getColourPiece(row,col)
+                        ,chess.getIsReachable(row,col));
             }
         }
     }

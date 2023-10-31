@@ -84,15 +84,11 @@ public abstract class Piece {
 
         this.square = targetSquare;
 
-
-        // the king should be in check here , so the return of asKingIfinCheck Should be false
         solvesCheck = !this.askKingIfInCheck();
         originSquare.update(this,originSquare.getLocation());
         targetSquare.empty();
         targetSquare.update(temporaryPiece, targetSquare.getLocation());
         this.square = originSquare;
-
-        // hier ook verwijzing van piece zelf updatej
 
         return solvesCheck;
 
@@ -116,6 +112,17 @@ public abstract class Piece {
     }
 
     public abstract boolean isValidMove(int targetRow, int targetCol);
+
+    public void addReachableToSquares(){
+        for (int i = 0; i <= 63; i++) {
+            Square targetSquare = board.getSquareIndex(i);
+            int targetrow = targetSquare.getLocation()[0];
+            int targetcol = targetSquare.getLocation()[1];
+            if (isValidMove(targetrow, targetcol)) {
+                targetSquare.updateReachableSquare(true);
+            }
+        }
+    }
 
 
 }

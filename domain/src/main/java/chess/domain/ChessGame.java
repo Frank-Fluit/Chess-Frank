@@ -78,6 +78,8 @@ public class ChessGame implements Playable{
     }
 
 
+
+
     @Override
     public Boolean isPLayersTurn(String colour) {
         if(colour == "white"){
@@ -85,6 +87,14 @@ public class ChessGame implements Playable{
         }
         else{
             return chessBoard.getPlayerWhite().getOpponent().getHasTurn();
+        }
+    }
+
+    @Override
+    public void removeReachableFromSquares() {
+        for (int i = 0; i <= 63; i++) {
+            Square square = chessBoard.getSquareIndex(i);
+            square.resetReachableSquare();
         }
     }
 
@@ -132,6 +142,20 @@ public class ChessGame implements Playable{
         }
         else {
             return square.getPiece().getOwner().getColour();
+        }
+    }
+
+    @Override
+    public Boolean getIsReachable(int row, int col) {
+        Square square = chessBoard.getSquares(row, col);
+        return square.isReachableSquare();
+    }
+
+    @Override
+    public void updateSquares(int row, int col) {
+        Square square = chessBoard.getSquares(row, col);
+        if(square.getPiece() != null){
+            square.getPiece().addReachableToSquares();
         }
     }
 }

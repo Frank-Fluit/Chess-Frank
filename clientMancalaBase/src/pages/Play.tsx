@@ -33,14 +33,42 @@ export const Play = () => {
       }
     }
 
+        async function doPotential(originSquare: number[]) {
+          try {
+            const response = await fetch("api/potential", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                originSquare: originSquare, // Updated the object properties
+
+              }),
+            });
+
+            if (response.ok) {
+              const gameState = await response.json();
+              setGameState(gameState);
+            } else {
+              console.error(`HTTP error! Status: ${response.status}`);
+            }
+          } catch (error) {
+            console.error('Fetch error:', error);
+          }
+        }
+
     
 
 
     function handleSquareClick(row, col) {
       const location = [7-row, col];
+      const location2 = [row,col]
       if (originSquare[0] == null) {
         // If no origin selected, set the selected piece as the origin
         setoriginSquare(location);
+
+        doPotential(location);
       } else {
         // If origin already selected, set the selected location as the target and make the move
         setTargetSquare(location);
@@ -62,8 +90,10 @@ export const Play = () => {
       {gameState?.squares[0].map((_, colIndex) => (
         <div key={colIndex} className="w-20 h-20">
           {gameState.squares.slice().reverse().map((row, rowIndex) => (
-            <div key={rowIndex} className={`w-full h-full border border-gray-300 flex items-center justify-center
-              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-white-200' : 'bg-green-200'}`} onClick={() => handleSquareClick(rowIndex, colIndex)}>
+            <div key={rowIndex} className={`w-full h-full border border-black-600 flex items-center justify-center
+
+              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-white-200' : 'bg-green-200'}
+              ${gameState.squares.slice().reverse()[rowIndex][colIndex].reachableSquare ? 'border border-red-600' : ''}`} onClick={() => handleSquareClick(rowIndex, colIndex)}>
               {row[colIndex].pieceEnum !== 'Empty' ? (
 
 

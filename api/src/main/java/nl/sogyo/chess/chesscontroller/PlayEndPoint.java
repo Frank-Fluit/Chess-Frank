@@ -42,6 +42,7 @@ public class PlayEndPoint {
         System.out.println(Arrays.toString(targetSquare));
 
         chess.playPiece(originSquare,targetSquare);
+        chess.removeReachableFromSquares();
 
         if(chess.isEndOfGame()){
 
