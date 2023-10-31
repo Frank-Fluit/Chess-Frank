@@ -102,7 +102,7 @@ public class Pawn extends Piece {
         if(this.getOwner().getColour() == "white" && targetSquare.getLocation()[0] == 7){
         return true;
         }
-        return this.getOwner().getColour() == "black" && targetSquare.getLocation()[1] == 0;
+        return this.getOwner().getColour() == "black" && targetSquare.getLocation()[0] == 0;
     }
 
     void doMove(int targetRow, int targetCol) {
