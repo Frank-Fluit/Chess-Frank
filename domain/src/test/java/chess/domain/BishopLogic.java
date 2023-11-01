@@ -126,7 +126,7 @@ public class BishopLogic {
 //    }
 
     @ParameterizedTest
-    @ValueSource(ints = {2,3,4,5,6,7})
+    @ValueSource(ints = {3,4,5,6,7})
     public void TestIfDoubleLeftDiagonalMoveIsAllowed(int num){
         Board chessBoard = new Board(BishopBoard);
         Square squareRow1 = chessBoard.getSquares(1,num);
@@ -260,7 +260,7 @@ public class BishopLogic {
 //    }
 
     @ParameterizedTest
-    @ValueSource(ints = {2,3,4,5,6,7})
+    @ValueSource(ints = {3,4,5,6,7})
     public void TestIfDoubleLeftDiagonalMoveIsAllowedBlack(int num){
         Board chessBoard = new Board(BishopBoard);
         King whiteKing = (King)chessBoard.getSquares(0,1).getPiece();

@@ -19,7 +19,29 @@ public class Queen extends Piece{
 
     @Override
     protected boolean seesKing(Square squareEnemyKing) {
-        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
+        int[] location = this.getParentSquare().getLocation();
+        int originRow = location[0];
+        int originCol = location[1];
+        int kingRow = squareEnemyKing.getLocation()[0];
+        int kingCol = squareEnemyKing.getLocation()[1];
+
+        int absRowDifference = Math.abs(kingRow - originRow);
+        int absColDifference = Math.abs(kingCol - originCol);
+
+        if(absColDifference != absRowDifference && absColDifference != 0 && absRowDifference!= 0)
+            return false;
+        if(absColDifference >1 && absColDifference == absRowDifference){
+            return checkIfDiagonalIsEmpty(this.getParentSquare().getLocation(), kingRow,kingCol);
+        }
+        if(absColDifference >1 && absRowDifference ==0){
+            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), kingCol);
+        }
+        if(absRowDifference >1 && absColDifference ==0){
+            return checkIfColIsEmpty(this.getParentSquare().getLocation(), kingRow);
+        }
+        else{
+            return true;
+        }
     }
 
 
@@ -41,6 +63,10 @@ public class Queen extends Piece{
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
 
         if(absColDifference != absRowDifference && absColDifference != 0 && absRowDifference!= 0)
             return false;
@@ -57,9 +83,7 @@ public class Queen extends Piece{
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
-        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
-            return false;
-        }
+
 
 
         else{

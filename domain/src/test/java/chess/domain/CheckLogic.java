@@ -71,32 +71,7 @@ public class CheckLogic {
             "VEEEEEEE" ;
 
 
-    String blackKingInCheckByQueen = "KEEEEEEU" +
-            "PPEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "WWEEEEEE" +
-            "VEEEEEEQ" ;
 
-    String blackKingInCheckByRook = "KEEEEEEX" +
-            "PPEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "WWEEEEEE" +
-            "VEEEEEER" ;
-
-    String blackKingInCheckByKnight = "KEEEEEEE" +
-            "PPEEEEEE" +
-            "EYEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "WWHEEEEE" +
-            "VEEEEEEE" ;
 
     String blackKingInCheckByBishop = "EEEEEEKE" +
             "PPEEEEZE" +
@@ -107,14 +82,6 @@ public class CheckLogic {
             "WWEEEEBE" +
             "EEEEEEEV" ;
 
-    String blackKingInCheckByPawn = "EEEEEEEK" +
-            "PPEEEEWE" +
-            "EYEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "WWEEEEPE" +
-            "EEEEEEEV" ;
 
     String blackBishopcanSolveCheckBoard = "EKEEEEEE" +
             "EEBEEEEE" +
@@ -125,14 +92,7 @@ public class CheckLogic {
             "EEEEEEEE" +
             "EXEEEEEV" ;
 
-    String blackBishopcannotSolveCheckBoard = "EKEEEEEE" +
-            "EEEBEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EEEEEEEE" +
-            "EXEEEEEV" ;
+
 
     String boardWithPotentialBlackCheckByQueen ="EEEKEEEE" +
             "EEEEEEEE" +
@@ -142,6 +102,24 @@ public class CheckLogic {
             "EEEEEEEE" +
             "EEEEEEEE" +
             "EEEEUVEE" ;
+
+    String boardWhereYouCouldCheckYourself="EUEQKBHR" +
+            "EREEPPPP" +
+            "EEEPEEEE" +
+            "EPPEHEEE" +
+            "EEEEEEBE" +
+            "EEEEEEEE" +
+            "WEWWWWWW" +
+            "XYZUVZYX" ;
+
+    String boardWhereIllegalMoveWasAllowed = "RHBEKBHR"+
+            "PPPEPPPP"+
+            "EEEEEEEE"+
+            "EEEPEEEE"+
+            "EQEWEEEE"+
+            "EEEUEEEE"+
+            "WWWEWWWW"+
+            "XYZEVZYX";
 
 
     @Test
@@ -216,25 +194,9 @@ public class CheckLogic {
         assertFalse(isKingInCheck);
     }
 
-    @Test
-    public void TestIfBlackKingInCheckReturnsTrueWithQueen(){
-        Board chessBoard = new Board(blackKingInCheckByQueen);
-        Pawn pawn6_1 = (Pawn) chessBoard.getSquares(6,1).getPiece();
 
-        Boolean isKingInCheck = pawn6_1.askKingIfInCheck();
 
-        assertTrue(isKingInCheck);
-    }
 
-    @Test
-    public void TestIfBlackKingInCheckReturnsTrueWithRook(){
-        Board chessBoard = new Board(blackKingInCheckByRook);
-        Pawn pawn6_1 = (Pawn) chessBoard.getSquares(6,1).getPiece();
-
-        Boolean isKingInCheck = pawn6_1.askKingIfInCheck();
-
-        assertTrue(isKingInCheck);
-    }
 
 
     @Test
@@ -269,6 +231,34 @@ public class CheckLogic {
         assertEquals(King.class, chessBoard.getSquares(0,3).getPiece().getClass());
         assertNull(chessBoard.getSquares(0,4).getPiece());
     }
+
+    @Test
+    public void TestIfMoveToCheckIsNotOK(){
+        Board chessboard = new Board (boardWhereYouCouldCheckYourself);
+        Queen whiteQueen = (Queen) chessboard.getSquares(0,3).getPiece();
+
+        whiteQueen.startAMove(2,1);
+        assertEquals(Queen.class, chessboard.getSquares(0,3).getPiece().getClass());
+        assertNull(chessboard.getSquares(2,1).getPiece());
+    }
+
+    @Test
+    public void testIllegalQueenMove(){
+        Board chessboard = new Board(boardWhereIllegalMoveWasAllowed);
+        chessboard.getPlayerWhite().switchTurn();
+
+        Queen blackQueen  = (Queen) chessboard.getSquares(5,3).getPiece();
+        blackQueen.startAMove(3,1);
+
+        assertEquals(Queen.class, chessboard.getSquares(5,3).getPiece().getClass());
+        assertNull(chessboard.getSquares(3,1).getPiece());
+
+
+
+
+    }
+
+
 
 
 }

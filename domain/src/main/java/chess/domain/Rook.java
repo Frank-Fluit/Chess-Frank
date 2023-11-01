@@ -17,7 +17,29 @@ public class Rook extends Piece {
 
     @Override
     protected boolean seesKing(Square squareEnemyKing) {
-        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
+        int[] location = this.getParentSquare().getLocation();
+        int originRow = location[0];
+        int originCol = location[1];
+        int kingRow = squareEnemyKing.getLocation()[0];
+        int kingCol = squareEnemyKing.getLocation()[1];
+
+        int absRowDifference = Math.abs(kingRow - originRow);
+        int absColDifference = Math.abs(kingCol - originCol);
+
+        if(absColDifference != 0 && absRowDifference!= 0)
+            return false;
+
+        if(absColDifference >1 ){
+            return checkIfRowIsEmpty(this.getParentSquare().getLocation(), kingCol);
+        }
+
+        if(absRowDifference >1){
+            return checkIfColIsEmpty(this.getParentSquare().getLocation(), kingRow);
+        }
+
+        else{
+            return true;
+        }
     }
 
 
@@ -47,6 +69,10 @@ public class Rook extends Piece {
         if(absColDifference != 0 && absRowDifference!= 0)
             return false;
 
+        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
+            return false;
+        }
+
         if(absColDifference >1 ){
             return checkIfRowIsEmpty(this.getParentSquare().getLocation(), targetCol);
         }
@@ -55,9 +81,7 @@ public class Rook extends Piece {
             return checkIfColIsEmpty(this.getParentSquare().getLocation(), targetRow);
         }
 
-        if(!checkMoveDoesNotLeadToCheck(this.getParentSquare(),targetSquare)){
-            return false;
-        }
+
 
         else{
             return true;
