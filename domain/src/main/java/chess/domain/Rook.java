@@ -1,7 +1,13 @@
 package chess.domain;
 
 public class Rook extends Piece {
-    public Rook(Square square,Board board, Player owner) {
+    int[] previousLocation;
+
+    public int[] getPreviousLocation() {
+        return previousLocation;
+    }
+
+    public Rook(Square square, Board board, Player owner) {
         this.square = square;
         this.board = board;
         this.owner = owner;
@@ -131,6 +137,9 @@ public class Rook extends Piece {
 
 
     void doMove(int targetRow, int targetCol){
+
+        this.previousLocation = this.square.getLocation();
+
         Square targetSquare = this.board.getSquares(targetRow,targetCol);
         if(targetSquare.checkIfContainsPiece()){
             targetSquare.pieceGetsTaken();
