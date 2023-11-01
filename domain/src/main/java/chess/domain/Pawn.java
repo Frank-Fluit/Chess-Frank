@@ -152,9 +152,7 @@ public class Pawn extends Piece {
 
     void doMove(int targetRow, int targetCol) {
 
-
         this.previousLocation = this.square.getLocation();
-
 
         Square targetSquare = this.board.getSquares(targetRow, targetCol);
         if (targetSquare.checkIfContainsPiece()) {
