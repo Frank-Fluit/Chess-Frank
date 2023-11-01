@@ -15,10 +15,6 @@ public class Bisshop extends Piece {
         }
     }
 
-    @Override
-    protected boolean seesKing(Square squareEnemyKing) {
-        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
-    }
 
 
 
@@ -32,7 +28,29 @@ public class Bisshop extends Piece {
     }
 
 
+    @Override
+    protected boolean seesKing(Square squareEnemyKing) {
 
+        int[] location = this.getParentSquare().getLocation();
+        int originRow = location[0];
+        int originCol = location[1];
+        int kingRow = squareEnemyKing.getLocation()[0];
+        int kingCol = squareEnemyKing.getLocation()[1];
+
+        int absRowDifference = Math.abs(kingRow - originRow);
+        int absColDifference = Math.abs(kingCol - originCol);
+
+        if(absColDifference != absRowDifference)
+            return false;
+
+        if(absColDifference >1 ){
+            return checkIfDiagonalIsEmpty(this.getParentSquare().getLocation(), kingRow,kingCol);
+        }
+
+        else{
+            return true;
+        }
+    }
 
 
     public boolean isValidMove(int targetRow, int targetCol) {

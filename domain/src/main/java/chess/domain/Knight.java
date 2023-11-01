@@ -15,10 +15,7 @@ public class Knight extends Piece {
         }
     }
 
-    @Override
-    protected boolean seesKing(Square squareEnemyKing) {
-        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
-    }
+
     @Override
     protected boolean canItSolveCheck(Square squareParentKing) {
         return false;
@@ -29,6 +26,20 @@ public class Knight extends Piece {
         return (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol <8);
     }
 
+    @Override
+    protected boolean seesKing(Square squareEnemyKing) {
+
+        int[] location = this.getParentSquare().getLocation();
+        int originRow = location[0];
+        int originCol = location[1];
+        int kingRow = squareEnemyKing.getLocation()[0];
+        int kingCol = squareEnemyKing.getLocation()[1];
+        int absRowDifference = Math.abs(kingRow - originRow);
+        int absColDifference = Math.abs(kingCol - originCol);
+
+        return (absColDifference == 2 && absRowDifference == 1) || (absRowDifference == 2 && absColDifference == 1);
+
+    }
     public boolean isValidMove(int targetRow, int targetCol) {
 
 

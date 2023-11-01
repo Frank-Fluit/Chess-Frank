@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RookLogic {
 
-    String rookBoard = "EKKKKKKK" +
+    String rookBoard = "EKEEEEEE" +
             "RRRRRRRR" +
             "EEEEEEEE" +
             "EEEEEEEE" +
             "EEEEEEEE" +
             "EEEEEEEE" +
             "XXXXXXXX" +
-            "EVVVVVVV";
+            "EVEEEEEE";
 
     String rookBoardSecond = "KREEEEXV" +
             "EREEEEXE" +

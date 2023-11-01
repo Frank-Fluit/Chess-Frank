@@ -22,7 +22,52 @@ public class Pawn extends Piece {
 
     @Override
     protected boolean seesKing(Square squareEnemyKing) {
-        return isValidMove(squareEnemyKing.getLocation()[0],squareEnemyKing.getLocation()[1]);
+
+        int[] location = this.getParentSquare().getLocation();
+        int originRow = location[0];
+        int originCol = location[1];
+        int kingRow = squareEnemyKing.getLocation()[0];
+        int kingCol = squareEnemyKing.getLocation()[1];
+
+        int rowDifference = kingRow - originRow;
+        int colDifference = kingCol - originCol;
+        if (rowDifference < 0 && this.getOwner().getColour().equals("white")) {
+            return false;
+        }
+        if (rowDifference > 0 && this.getOwner().getColour().equals("black")) {
+            return false;
+        }
+        if (colDifference != 0 && squareEnemyKing.getPiece() == null) {
+            return false;
+        }
+        if (Math.abs(rowDifference) == 2 && this.getOwner().getColour().equals("white") && board.getSquares(originRow + 1, originCol).getPiece() != null) {
+            return false;
+        }
+        if (Math.abs(rowDifference) == 2 && this.getOwner().getColour().equals("black") && board.getSquares(originRow - 1, originCol).getPiece() != null) {
+            return false;
+        }
+        if (Math.abs(rowDifference) > 1 && this.previousLocation != null) {
+            return false;
+        }
+        if (Math.abs(rowDifference) > 2) {
+            return false;
+        }
+        if (Math.abs(rowDifference) == 2 && Math.abs(colDifference) !=0 ) {
+            return false;
+        }
+
+        if (Math.abs(colDifference) > 1) {
+            return false;
+        }
+        if (Math.abs(colDifference) > 0 && rowDifference == 0) {
+            return false;
+        }
+
+        if (Math.abs(colDifference) == 0 && squareEnemyKing.getPiece() != null) {
+            return false;
+        }
+
+        return true;
     }
     @Override
     protected boolean canItSolveCheck(Square squareParentKing) {

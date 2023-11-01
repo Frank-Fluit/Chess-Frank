@@ -34,7 +34,7 @@ public class CheckMateLogic {
             "EEEEEEWE" +
             "EEEEEEEV" ;
 
-    String backRankMateWithTwoRooksMoveBefore ="QEEEEEEE" +
+    String backRankMateWithTwoRooksMoveBefore ="QKEEEEEE" +
             "EEEEEEEE" +
             "EEEEEEEE" +
             "EEEEEEEE" +
