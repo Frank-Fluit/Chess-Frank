@@ -30,7 +30,6 @@ public class King extends Piece {
         }
     }
 
-
     @Override
     protected boolean seesKing(Square squareEnemyKing) {
         return false;
@@ -53,7 +52,6 @@ public class King extends Piece {
         int absRowDifference = Math.abs(targetRow - originRow);
         int absColDifference = Math.abs(targetCol - originCol);
 
-
         if(!this.getOwner().getHasTurn()){
             return false;
         }
@@ -62,16 +60,18 @@ public class King extends Piece {
             return false;
         }
 
-        if(absColDifference > 1){
-            return isValidCastling(targetRow,targetCol);
+        if(absColDifference > 1 && originRow == 0){
+            return isValidCastlingWhite(targetRow,targetCol);
+        }
+
+        if(absColDifference > 1 && originRow == 7){
+            return isValidCastlingBlack(targetRow,targetCol);
         }
 
         return (absColDifference == 1 && absRowDifference == 1) ||
                 (absColDifference == 1 && absRowDifference == 0) ||
                 (absColDifference == 0 && absRowDifference == 1);
-
     }
-
 
     public void updateSquares(Square originSquare, Square targetSquare){
         targetSquare.update(originSquare.getPiece(), targetSquare.getLocation());
@@ -100,55 +100,146 @@ public class King extends Piece {
     private boolean isPotentialCastle( int targetCol) {
         return Math.abs(targetCol - this.getParentSquare().getLocation()[1]) > 1;
     }
-    private boolean isValidCastling(int targetRow, int targetCol) {
 
-        // check if pieces are in right location and did not move yet, and the targetlocation is valid
+    private boolean isValidCastlingBlack(int targetRow, int targetCol) {
 
-
-        if(!(targetRow == 0 && targetCol == 6)){
+        if (!((targetRow == 7 && targetCol == 6) || (targetRow == 7 && targetCol == 2))) {
             return false;
         }
 
-        Square rookSquare = this.board.getSquares(0,7);
-        if(rookSquare.getPiece() == null || rookSquare.getPiece().getClass() != Rook.class) {
-            return false;
-        }
-        Rook rook = (Rook) rookSquare.getPiece();
-        if(this.square.getLocation()[0] != 0 && this.square.getLocation()[1] != 4){
-            return false;
-        }
-        if(rook.getPreviousLocation() != null || this.getPreviousLocation() != null){
-            return false;
+        if(targetCol == 6) {
+            Square kingrookSquare = this.board.getSquares(7, 7);
+            if (kingrookSquare.getPiece() == null || kingrookSquare.getPiece().getClass() != Rook.class) {
+                return false;
+            }
+            Rook kingrook = (Rook) kingrookSquare.getPiece();
+            if (this.square.getLocation()[0] != 7 && this.square.getLocation()[1] != 4) {
+                return false;
+            }
+            if (kingrook.getPreviousLocation() != null || this.getPreviousLocation() != null) {
+                return false;
+            }
+            if (this.board.getSquares(7, 5).getPiece() != null ||
+                    this.board.getSquares(7, 6).getPiece() != null) {
+                return false;
+            }
+            if(this.board.getSquares(7,5).isSeenByOpponent(this.owner) || this.board.getSquares(7,6).isSeenByOpponent(this.owner) ||
+                    this.isCheck()){
+                return false;
+            }
         }
 
-        if(this.board.getSquares(0,5).getPiece() != null ||
-                this.board.getSquares(0,6).getPiece() != null ){
-            return false;
+        if(targetCol ==2) {
+            Square queenrookSquare = this.board.getSquares(7, 0);
+            if (queenrookSquare.getPiece() == null || queenrookSquare.getPiece().getClass() != Rook.class) {
+                return false;
+            }
+            Rook queenrook = (Rook) queenrookSquare.getPiece();
+            if (this.square.getLocation()[0] != 7 && this.square.getLocation()[1] != 4) {
+                return false;
+            }
+            if (queenrook.getPreviousLocation() != null || this.getPreviousLocation() != null) {
+                return false;
+            }
+            if (this.board.getSquares(7, 2).getPiece() != null ||
+                    this.board.getSquares(7, 3).getPiece() != null) {
+                return false;
+            }
+            if(this.board.getSquares(7,2).isSeenByOpponent(this.owner) || this.board.getSquares(7,3).isSeenByOpponent(this.owner) ||
+                    this.isCheck()){
+                return false;
+            }
         }
-
-        // the check of the targetsquare has been taken care of in the isvalidMove Functie
         // TODO
-        // add a check of check for the row and for the row that is crossed
+        return true;
+    }
+    private boolean isValidCastlingWhite(int targetRow, int targetCol) {
+
+        if (!((targetRow == 0 && targetCol == 6) || (targetRow == 0 && targetCol == 2))) {
+            return false;
+        }
+
+        if(targetCol == 6) {
+            Square kingrookSquare = this.board.getSquares(0, 7);
+            if (kingrookSquare.getPiece() == null || kingrookSquare.getPiece().getClass() != Rook.class) {
+                return false;
+            }
+            Rook kingrook = (Rook) kingrookSquare.getPiece();
+            if (this.square.getLocation()[0] != 0 && this.square.getLocation()[1] != 4) {
+                return false;
+            }
+            if (kingrook.getPreviousLocation() != null || this.getPreviousLocation() != null) {
+                return false;
+            }
+            if (this.board.getSquares(0, 5).getPiece() != null ||
+                    this.board.getSquares(0, 6).getPiece() != null) {
+                return false;
+            }
+            if(this.board.getSquares(0,5).isSeenByOpponent(this.owner) || this.board.getSquares(0,6).isSeenByOpponent(this.owner) ||
+            this.isCheck()){
+                return false;
+            }
+        }
+
+        if(targetCol ==2) {
+            Square queenrookSquare = this.board.getSquares(0, 0);
+            if (queenrookSquare.getPiece() == null || queenrookSquare.getPiece().getClass() != Rook.class) {
+                return false;
+            }
+            Rook queenrook = (Rook) queenrookSquare.getPiece();
+            if (this.square.getLocation()[0] != 0 && this.square.getLocation()[1] != 4) {
+                return false;
+            }
+            if (queenrook.getPreviousLocation() != null || this.getPreviousLocation() != null) {
+                return false;
+            }
+            if (this.board.getSquares(0, 2).getPiece() != null ||
+                    this.board.getSquares(0, 3).getPiece() != null) {
+                return false;
+            }
+            if(this.board.getSquares(0,2).isSeenByOpponent(this.owner) || this.board.getSquares(0,3).isSeenByOpponent(this.owner) ||
+                    this.isCheck()){
+                return false;
+            }
+        }
+        //TODO
         return true;
     }
 
     private void doCastleMove(int targetRow, int targetCol) {
 
-        // now this function is the old doMove, it has to be updated into the castlemove, for now only Kingside
-
         this.previousLocation = this.square.getLocation();
-        Square rookSquare = this.board.getSquares(0,7);
-        Rook rook = (Rook) rookSquare.getPiece();
-
+        Square kingRookSquare = this.board.getSquares(0,7);
+        Square queenRookSquare = this.board.getSquares(0,0);
+        Square blackKingRookSquare = this.board.getSquares(7,7);
+        Square blackQueenRookSquare = this.board.getSquares(7,0);
 
         Square originSquare = this.getParentSquare();
 
-        //updatesquare call 1
-        updateSquares(originSquare,this.board.getSquares(0,6));
+        if(targetRow == 0) {
 
-        //updatesquare call 2
-        updateSquares(rookSquare,this.board.getSquares(0,5));
+            if (targetCol == 2) {
+                updateSquares(originSquare, this.board.getSquares(0, 2));
+                updateSquares(queenRookSquare, this.board.getSquares(0, 3));
+            }
+            if (targetCol == 6) {
 
+                updateSquares(originSquare, this.board.getSquares(0, 6));
+                updateSquares(kingRookSquare, this.board.getSquares(0, 5));
+            }
+        }
+
+        if(targetRow == 7) {
+
+            if (targetCol == 2) {
+                updateSquares(originSquare, this.board.getSquares(7, 2));
+                updateSquares(blackQueenRookSquare, this.board.getSquares(7, 3));
+            }
+            if (targetCol == 6) {
+                updateSquares(originSquare, this.board.getSquares(7, 6));
+                updateSquares(blackKingRookSquare, this.board.getSquares(7, 5));
+            }
+        }
 
         if(this.isOpponentKingCheckMate()){
             setOpponentCheckMate();
@@ -168,8 +259,6 @@ public class King extends Piece {
         return false;
     }
 
-
-
     public boolean isCheckMate() {
         if (!isCheck()) {
             return false;
@@ -177,12 +266,10 @@ public class King extends Piece {
         for (int i = 0; i < 64; i++) {
             Square square = board.getSquareIndex(i);
             Piece piece = square.getPiece();
-            //all own pieces are checked if they can solve chech
             if (piece != null && piece.getOwner() == this.getOwner() && piece.canItSolveCheck(this.square)) {
                 return false;
             }
         }
-        // this should be reached when no false is returned as a result of no pieces that can solve the checkmate
         return true;
     }
 

@@ -7,10 +7,9 @@ public class Square {
     Player owner;
     Boolean reachableSquare;
 
-    public Square(){
+    public Square() {
 
     }
-
 
 
     public Square(int[] location, Board board, Player playerWhite) {
@@ -22,50 +21,49 @@ public class Square {
         initializePiece(playerWhite);
     }
 
-    public Square(int[] location, Board board, Player playerWhite, char pieceToBuild){
+    public Square(int[] location, Board board, Player playerWhite, char pieceToBuild) {
         this.location = location;
         this.board = board;
         this.reachableSquare = false;
-        if(Character.toString(pieceToBuild).equals("E")){
+        if (Character.toString(pieceToBuild).equals("E")) {
             this.piece = null;
         }
-        if(Character.toString(pieceToBuild).equals("R")){
+        if (Character.toString(pieceToBuild).equals("R")) {
             this.piece = new Rook(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("H")){
+        if (Character.toString(pieceToBuild).equals("H")) {
             this.piece = new Knight(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("B")){
+        if (Character.toString(pieceToBuild).equals("B")) {
             this.piece = new Bisshop(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("Q")){
+        if (Character.toString(pieceToBuild).equals("Q")) {
             this.piece = new Queen(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("K")){
+        if (Character.toString(pieceToBuild).equals("K")) {
             this.piece = new King(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("P")){
+        if (Character.toString(pieceToBuild).equals("P")) {
             this.piece = new Pawn(this, board, playerWhite);
         }
-        if(Character.toString(pieceToBuild).equals("X")){
+        if (Character.toString(pieceToBuild).equals("X")) {
             this.piece = new Rook(this, board, playerWhite.getOpponent());
         }
-        if(Character.toString(pieceToBuild).equals("Y")){
+        if (Character.toString(pieceToBuild).equals("Y")) {
             this.piece = new Knight(this, board, playerWhite.getOpponent());
         }
-        if(Character.toString(pieceToBuild).equals("Z")){
+        if (Character.toString(pieceToBuild).equals("Z")) {
             this.piece = new Bisshop(this, board, playerWhite.getOpponent());
         }
-        if(Character.toString(pieceToBuild).equals("U")){
+        if (Character.toString(pieceToBuild).equals("U")) {
             this.piece = new Queen(this, board, playerWhite.getOpponent());
         }
-        if(Character.toString(pieceToBuild).equals("V")){
+        if (Character.toString(pieceToBuild).equals("V")) {
             this.piece = new King(this, board, playerWhite.getOpponent());
         }
-        if(Character.toString(pieceToBuild).equals("W")){
+        if (Character.toString(pieceToBuild).equals("W")) {
             this.piece = new Pawn(this, board, playerWhite.getOpponent());
         }
-
 
 
     }
@@ -76,28 +74,28 @@ public class Square {
 
         if (row == 1) {
 
-            piece = new Pawn(this,board,playerWhite);
+            piece = new Pawn(this, board, playerWhite);
         } else if (row == 6) {
 
-            piece = new Pawn(this,board,playerWhite.getOpponent());
+            piece = new Pawn(this, board, playerWhite.getOpponent());
         } else if (row == 0 || row == 7) {
 
             if (col == 0 || col == 7) {
-                piece = new Rook(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+                piece = new Rook(this, board, row == 0 ? playerWhite : playerWhite.getOpponent());
             } else if (col == 1 || col == 6) {
-                piece = new Knight(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+                piece = new Knight(this, board, row == 0 ? playerWhite : playerWhite.getOpponent());
             } else if (col == 2 || col == 5) {
-                piece = new Bisshop(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+                piece = new Bisshop(this, board, row == 0 ? playerWhite : playerWhite.getOpponent());
             } else if (col == 3) {
-                piece = new Queen(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+                piece = new Queen(this, board, row == 0 ? playerWhite : playerWhite.getOpponent());
             } else if (col == 4) {
-                piece = new King(this,board,row == 0 ? playerWhite : playerWhite.getOpponent());
+                piece = new King(this, board, row == 0 ? playerWhite : playerWhite.getOpponent());
 
             }
         }
     }
 
-    public Square(Piece piece){
+    public Square(Piece piece) {
         this.piece = piece;
     }
 
@@ -105,11 +103,11 @@ public class Square {
         return this.piece;
     }
 
-    protected int[] getLocation(){
+    protected int[] getLocation() {
         return this.location;
     }
 
-    public void empty(){
+    public void empty() {
         this.piece = null;
     }
 
@@ -117,7 +115,7 @@ public class Square {
         return this.getPiece() != null;
     }
 
-    public void update(Piece piece, int[] location){
+    public void update(Piece piece, int[] location) {
         this.piece = piece;
         this.location = location;
     }
@@ -130,11 +128,24 @@ public class Square {
         this.reachableSquare = reachableSquare;
     }
 
-    protected void resetReachableSquare(){
-        reachableSquare =false;
+    protected void resetReachableSquare() {
+        reachableSquare = false;
     }
 
     public void pieceGetsTaken() {
         this.piece = null;
+    }
+
+    public boolean isSeenByOpponent(Player owner) {
+        for (int i = 0; i <= 63; i++) {
+            Square square = board.getSquareIndex(i);
+            Piece piece = square.getPiece();
+            if (piece != null && !(piece instanceof King) && piece.getOwner() != owner) {
+                if (piece.seesKing(this)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
