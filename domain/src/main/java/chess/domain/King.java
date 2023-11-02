@@ -3,7 +3,7 @@ package chess.domain;
 public class King extends Piece {
     private Boolean checkMate;
 
-    
+
 
     private int[] previousLocation;
 
