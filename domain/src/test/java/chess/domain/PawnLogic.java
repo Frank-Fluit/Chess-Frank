@@ -7,6 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PawnLogic {
 
+    String enPassentBoard = "EEEEEEEK" +
+            "PPPPPPPP"+
+            "EEEEEEEE"+
+            "EEWEEEEE"+
+            "EEEEEEEE"+
+            "EEEEEEEE"+
+            "WWEWWWWW"+
+            "EEEEEEEV";
+
+
+    @Test
+    public void testEnPassentCaptureByWhite() {
+        Board chessBoard = new Board(enPassentBoard);
+        chessBoard.getSquares(1,3).getPiece().startAMove(3,3);
+        chessBoard.getSquares(3,2).getPiece().startAMove(2,3);
+
+        assertNull(chessBoard.getSquares(3,3).getPiece());
+        assertEquals(chessBoard.getSquares(2,3).getPiece().getClass(), Pawn.class);
+
+    }
+
 
     @ParameterizedTest
     @ValueSource(ints = {0,1,2,3,4,5,6,7})
