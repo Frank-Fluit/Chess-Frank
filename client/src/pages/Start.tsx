@@ -6,6 +6,9 @@ import { FloatingInput } from "../components/FloatingInput";
 import classNames from "classnames";
 import { Alert } from "../components/Alert";
 import backgroundImage from '../assets/chessImage.jpg';
+import pattern1 from '../assets/pattern1.jpg';
+import pattern2 from '../assets/pattern2.jpg';
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -34,7 +37,7 @@ export const Start = () => {
 
     return (
         <div className="`relative h-full w-screen bg-cover bg-center bg-no-repeat p-12 text-center bg-mancala"
-        style={{ backgroundImage: `url(${backgroundImage})` }}>
+        style={{ backgroundImage: `url(${pattern1})` }}>
             <div className="absolute2 bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed bg-black/60">
                 <div className="flex h-full items-center justify-center">
                     <div className="text-white">
