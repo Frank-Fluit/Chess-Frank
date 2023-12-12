@@ -2,7 +2,7 @@ package chess.domain;
 
 public class Pawn extends Piece {
 
-    int[] previousLocation;
+    private int[] previousLocation;
 
     public Pawn() {
     }

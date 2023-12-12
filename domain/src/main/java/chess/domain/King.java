@@ -1,13 +1,15 @@
 package chess.domain;
 
 public class King extends Piece {
-    Boolean checkMate;
+    private Boolean checkMate;
+
+
+
+    private int[] previousLocation;
 
     public int[] getPreviousLocation() {
         return previousLocation;
     }
-
-    int[] previousLocation;
 
     public King(Square square,Board board, Player owner) {
         this.square = square;

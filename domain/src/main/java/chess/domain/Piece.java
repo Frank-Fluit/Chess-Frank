@@ -3,6 +3,7 @@ package chess.domain;
 public abstract class Piece {
 
     Board board;
+
     Square square;
 
     Player owner;

@@ -1,11 +1,11 @@
 import { useMancalaGame } from "../contexts/MancalaGameContext";
 import classNames from "classnames";
 import Bowl from "../components/BowlRendering";
-import { useState } from 'react' // based on old file
+import { useState } from 'react' 
 
 export const Play = () => {
     const { gameState, setGameState } = useMancalaGame();
-    const [originSquare, setoriginSquare] = useState([null, null]); // To choose a location (based on old file)
+    const [originSquare, setoriginSquare] = useState([null, null]); 
     const [targetSquare, setTargetSquare] = useState([null, null]); 
 
     async function doMove(originSquare: number[],targetSquare: number[]) {
@@ -17,8 +17,8 @@ export const Play = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            originSquare: originSquare, // Updated the object properties
-            targetSquare: targetSquare, // Updated the object properties
+            originSquare: originSquare, 
+            targetSquare: targetSquare, 
           }),
         });
 
@@ -42,7 +42,7 @@ export const Play = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                originSquare: originSquare, // Updated the object properties
+                originSquare: originSquare, 
 
               }),
             });
@@ -80,20 +80,43 @@ export const Play = () => {
       }
     }
 
-   return   <div className="w-full max-w-md">
+   return   <div className="flex  flex-col w-full h-full bg-yellow-500 ">
+    <div className="text-center bg-yellow-500 ">
 
-    <div className="text-center mb-4">
-      <p className="text-xl font-bold">Speler 2: {gameState?.players[1].name}</p>
+    
+      <div className="text-[60px] font-bold">S  C  H  A  A  K</div>
     </div>
+
+    <div className="text-center bg-yellow-500 ">
+      <div className="text-3xl font-bold">Kant van speler zwart: {gameState?.players[1]?.hasTurn ? (
+  <span className="text-green-700 font-bold">
+    {gameState.players[1].name} aan de beurt
+  </span>
+) : (
+  gameState.players[1].name
+)} </div>
+    </div>
+
+
+  {/* Middle Section */}
+  <div className="flex">
+    {/* Left Side Text */}
+    <div className="text-center bg-yellow-100 w-[640px]">
+      <div className="text-3xl font-bold">Geslagen stukken door wit</div>
+    </div>
+    
+
+    {/* Board section */}
+  <div className="flex  flex-col items-center w-[776px] h-[776px] border-4 border-black bg-black" >
 
     <div className="grid grid-cols-8 gap-0" style={{ gridTemplateColumns: 'repeat(8, 1fr)' }}>
       {gameState?.squares[0].map((_, colIndex) => (
-        <div key={colIndex} className="w-20 h-20">
+        <div key={colIndex} className="w-24 h-24 ">
           {gameState.squares.slice().reverse().map((row, rowIndex) => (
-            <div key={rowIndex} className={`w-full h-full border border-black-600 flex items-center justify-center
+            <div key={rowIndex} className={`w-full h-full   border-[3px] flex items-center justify-center
 
-              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-white-200' : 'bg-green-200'}
-              ${gameState.squares.slice().reverse()[rowIndex][colIndex].reachableSquare ? 'border border-red-600' : ''}`} onClick={() => handleSquareClick(rowIndex, colIndex)}>
+              ${(rowIndex + colIndex) % 2 === 0 ? 'bg-yellow-100' : 'bg-yellow-800'}
+              ${gameState.squares.slice().reverse()[rowIndex][colIndex].reachableSquare ? 'bg-green-400 border-black' : 'border-black'}`} onClick={() => handleSquareClick(rowIndex, colIndex)}>
               {row[colIndex].pieceEnum !== 'Empty' ? (
 
 
@@ -154,16 +177,39 @@ export const Play = () => {
         </div>
       ))}
     </div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
 
-    <div className="text-center mt-40">
-      <p className="text-xl font-bold">Speler 1: {gameState?.players[0].name}</p>
-      <p className="text-xl font-bold">
-        <p className="text-xl font-bold">
-          Aan de beurt: {gameState?.players[0]?.hasTurn ? gameState.players[0].name + " (wit)" : gameState.players[1].name + " (zwart)"}
-        </p>
-      </p>
+    <div className="text-center bg-yellow-100 w-[640px] ">
+      <div className="text-3xl font-bold">Geslagen stukken door zwart</div>
+    </div>
+    
 
+  
+
+
+    
+    {/*End of the board div */}
+
+
+
+
+
+
+
+
+
+
+    </div>
+    
+
+    <div className="text-center bg-yellow-500">
+    <div className="text-3xl font-bold">Kant van speler wit : {gameState?.players[0]?.hasTurn ? (
+  <span className="text-green-700 font-bold">
+     {gameState.players[0].name} aan de beurt
+  </span>
+) : (
+  gameState.players[0].name
+)} </div>
 
     </div>
   </div>
